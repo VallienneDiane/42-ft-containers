@@ -3,28 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vallienne <vallienne@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2022/12/15 17:04:36 by dvallien         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:59:17 by vallienne        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <vector>
 #include "../incs/vector/Vector.hpp"
 
 int main(void)
 {
 	ft::vector<int> test;
+	// std::vector<int> test;
 
 	int i = 0;
 	for (int j = 15; j < 25; j++)
 	{
 		test.push_back(j);
-		std::cout << test[i] << std::endl;
+		std::cout << i << ' ' << test[i] << std::endl;
 		i++;
 	}
+	test.push_back(48);
+	std::cout << "at " << test.at(0) << std::endl;
+	std::cout << "crochet " << test[0] << std::endl;
 	test.pop_back();
+	std::cout << "at " << test.at(2) << std::endl;
+	// test.pop_back();
+	std::cout << "capacity " << test.capacity() << std::endl;
+	std::cout << "size " << test.size() << std::endl;
+	std::cout << "max size " << test.max_size() << std::endl;
 }
 
 

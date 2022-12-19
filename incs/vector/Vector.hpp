@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vallienne <vallienne@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:45:19 by dvallien          #+#    #+#             */
-/*   Updated: 2022/12/16 18:08:51 by vallienne        ###   ########.fr       */
+/*   Updated: 2022/12/19 12:19:43 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,25 @@ namespace ft
 				_capacity = new_capacity;
 			}
 
-			void	pop_back(void)
-			{
-				_size--;
-				alloc.destroy(_arr);
-			}
+			// void	pop_back(void)
+			// {
+			// 	_size--;
+			// 	alloc.destroy(end());
+			// }
+			
+			// iterator begin()
+			// {}
+			
+			// const_iterator begin() const
+			// {}
+			
+			// iterator end()
+			// {
+			// 	std::cout << "IT IS THE END" << std::endl;
+			// }
+
+			// const iterator end() const
+			// {}
 
 			size_type capacity() const { return (_capacity); }
 
@@ -98,6 +112,51 @@ namespace ft
 			size_type size() const { return (_size); }
 
 			size_type max_size() const { return (alloc.max_size()); }
+
+			void resize (size_type n, value_type val = value_type())
+			{
+				value_type	*new_arr;
+				size_type	new_capacity;
+				
+				new_capacity = _capacity;
+				new_arr = alloc.allocate(new_capacity);
+				try
+				{
+					if(n < _size)
+					{
+						for(int i = 0; i < n; i++)
+						{
+							alloc.construct(new_arr + i, _arr[i]);						
+							alloc.destroy(_arr + i);
+						}
+						alloc.destroy(_arr);
+						alloc.deallocate(_arr, _capacity);
+						_arr = new_arr;
+						_size = n;
+					}
+					else if (n > _size)
+					{
+						if(n > new_capacity)
+						{
+							new_capacity *= 2;
+							new_arr = alloc.allocate(new_capacity);
+							_capacity = new_capacity;
+						}
+						for(int i = 0; i < _size; i++)
+							alloc.construct(new_arr + i, _arr[i]);
+						for(int i = _size; i < n; i++)
+						{
+							alloc.construct(new_arr + i, val);
+							_size++;
+						}
+					}
+				}
+				catch(const std::exception& e)
+				{
+					throw  std::out_of_range("Out of Range error");
+				}
+				
+			}
 
 			reference at(size_type n)
 			{

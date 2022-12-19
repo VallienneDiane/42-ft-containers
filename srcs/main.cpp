@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vallienne <vallienne@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2022/12/16 17:59:17 by vallienne        ###   ########.fr       */
+/*   Updated: 2022/12/19 12:17:25 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,26 @@ int main(void)
 	for (int j = 15; j < 25; j++)
 	{
 		test.push_back(j);
-		std::cout << i << ' ' << test[i] << std::endl;
+		// std::cout << i << ' ' << test[i] << std::endl;
 		i++;
 	}
-	test.push_back(48);
-	std::cout << "at " << test.at(0) << std::endl;
-	std::cout << "crochet " << test[0] << std::endl;
-	test.pop_back();
-	std::cout << "at " << test.at(2) << std::endl;
-	// test.pop_back();
+	// std::cout << "at " << test.at(9) << std::endl;
+	// std::cout << "size " << test.size() << std::endl;
 	std::cout << "capacity " << test.capacity() << std::endl;
+	test.resize(18);
 	std::cout << "size " << test.size() << std::endl;
-	std::cout << "max size " << test.max_size() << std::endl;
+	std::cout << "at 0 " << test.at(0) << std::endl;
+	std::cout << "at 1 " << test.at(1) << std::endl;
+	std::cout << "at 8 " << test.at(8) << std::endl;
+	std::cout << "at 9 " << test.at(9) << std::endl;
+	std::cout << "at 14 " << test.at(14) << std::endl;
+	std::cout << "at 15 " << test.at(15) << std::endl;
+	std::cout << "capacity " << test.capacity() << std::endl;
+	
+	std::cout << "size " << test.size() << std::endl;
+
+	// test.pop_back();
+	// std::cout << "max size " << test.max_size() << std::endl;
 }
 
 

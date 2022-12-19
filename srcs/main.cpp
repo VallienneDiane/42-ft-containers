@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2022/12/19 12:17:25 by dvallien         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:50:15 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,14 @@ int main(void)
 		// std::cout << i << ' ' << test[i] << std::endl;
 		i++;
 	}
-	// std::cout << "at " << test.at(9) << std::endl;
-	// std::cout << "size " << test.size() << std::endl;
-	std::cout << "capacity " << test.capacity() << std::endl;
-	test.resize(18);
 	std::cout << "size " << test.size() << std::endl;
-	std::cout << "at 0 " << test.at(0) << std::endl;
-	std::cout << "at 1 " << test.at(1) << std::endl;
-	std::cout << "at 8 " << test.at(8) << std::endl;
-	std::cout << "at 9 " << test.at(9) << std::endl;
-	std::cout << "at 14 " << test.at(14) << std::endl;
-	std::cout << "at 15 " << test.at(15) << std::endl;
 	std::cout << "capacity " << test.capacity() << std::endl;
-	
+	test.clear();
 	std::cout << "size " << test.size() << std::endl;
-
+	std::cout << "capacity " << test.capacity() << std::endl;
+	// test.resize(16);
 	// test.pop_back();
+	// std::cout << "at " << test.at(9) << std::endl;
 	// std::cout << "max size " << test.max_size() << std::endl;
 }
 

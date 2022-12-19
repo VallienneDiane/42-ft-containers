@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:45:19 by dvallien          #+#    #+#             */
-/*   Updated: 2022/12/19 12:19:43 by dvallien         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:06:50 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,34 +80,7 @@ namespace ft
 				_capacity = new_capacity;
 			}
 
-			// void	pop_back(void)
-			// {
-			// 	_size--;
-			// 	alloc.destroy(end());
-			// }
-			
-			// iterator begin()
-			// {}
-			
-			// const_iterator begin() const
-			// {}
-			
-			// iterator end()
-			// {
-			// 	std::cout << "IT IS THE END" << std::endl;
-			// }
-
-			// const iterator end() const
-			// {}
-
 			size_type capacity() const { return (_capacity); }
-
-			bool empty() const
-			{
-				if(_size == 0)
-					return (true);
-				return (false);
-			}
 
 			size_type size() const { return (_size); }
 
@@ -118,12 +91,14 @@ namespace ft
 				value_type	*new_arr;
 				size_type	new_capacity;
 				
-				new_capacity = _capacity;
-				new_arr = alloc.allocate(new_capacity);
 				try
 				{
-					if(n < _size)
+					if (n == _size)
+						return ;
+					else if(n < _size)
 					{
+						new_capacity = _capacity;
+						new_arr = alloc.allocate(new_capacity);
 						for(int i = 0; i < n; i++)
 						{
 							alloc.construct(new_arr + i, _arr[i]);						
@@ -136,12 +111,8 @@ namespace ft
 					}
 					else if (n > _size)
 					{
-						if(n > new_capacity)
-						{
-							new_capacity *= 2;
-							new_arr = alloc.allocate(new_capacity);
-							_capacity = new_capacity;
-						}
+						new_capacity = n;
+						new_arr = alloc.allocate(new_capacity);
 						for(int i = 0; i < _size; i++)
 							alloc.construct(new_arr + i, _arr[i]);
 						for(int i = _size; i < n; i++)
@@ -150,34 +121,75 @@ namespace ft
 							_size++;
 						}
 					}
+					_capacity = new_capacity;
 				}
-				catch(const std::exception& e)
+				catch(const std::bad_alloc& e)
 				{
-					throw  std::out_of_range("Out of Range error");
+					throw ;
 				}
-				
+				catch(const std::length_error& e)
+				{
+					throw std::length_error("vector");
+				}
 			}
-
+			
 			reference at(size_type n)
 			{
 				if (n < 0 || n > _size)
-					throw  std::out_of_range("Out of Range error");
+					throw  std::out_of_range("vector");
 				return (_arr[n]);
 			}
 
 			const_reference at (size_type n) const
 			{
 				if (n < 0 || n > _size)
-					throw  std::out_of_range("Out of Range error");
+					throw  std::out_of_range("vector");
 				return (_arr[n]);
 			}
+
+			// reference front()
+			// {
+			// 	return (_arr[0]);
+			// }
+
+			// const_reference front() const
+			// {
+			// 	return (_arr[0]);
+			// }
 			
+			// reference back()
+			// {
+			// 	for(int i = 0; i < _size; i++)
+			// 	{}
+			// 	return (_arr[i]);
+			// }
+
+			// const_reference back() const
+			// {
+			// 	for(int i = 0; i < _size; i++)
+			// 	{}
+			// 	return (_arr[i]);
+			// }
+			
+			bool empty() const
+			{
+				if(_size == 0)
+					return (true);
+				return (false);
+			}
+
+			void clear()
+			{
+				alloc.destroy(_arr);
+				alloc.deallocate(_arr, _capacity);
+				_size = 0;
+			}
 			//////////////////////// OPERATORS /////////////////////////////
 			T const & operator[](size_type n) const { return (_arr[n]); }
 			T & operator[](size_type n) { return (_arr[n]); }
+			
+			//////////////////////// ITERATORS /////////////////////////////
 	};
 }
-
-
 
 #endif

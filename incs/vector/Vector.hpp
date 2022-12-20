@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vallienne <vallienne@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:45:19 by dvallien          #+#    #+#             */
-/*   Updated: 2022/12/19 17:06:50 by dvallien         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:14:20 by vallienne        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,10 @@ namespace ft
 					}
 					else if (n > _size)
 					{
-						new_capacity = n;
+						if (n > _capacity)
+							new_capacity = n;
+						else
+							new_capacity = _capacity;
 						new_arr = alloc.allocate(new_capacity);
 						for(int i = 0; i < _size; i++)
 							alloc.construct(new_arr + i, _arr[i]);
@@ -147,29 +150,25 @@ namespace ft
 				return (_arr[n]);
 			}
 
-			// reference front()
-			// {
-			// 	return (_arr[0]);
-			// }
+			reference front()
+			{
+				return (_arr[0]);
+			}
 
-			// const_reference front() const
-			// {
-			// 	return (_arr[0]);
-			// }
+			const_reference front() const
+			{
+				return (_arr[0]);
+			}
 			
-			// reference back()
-			// {
-			// 	for(int i = 0; i < _size; i++)
-			// 	{}
-			// 	return (_arr[i]);
-			// }
+			reference back()
+			{
+				return (_arr[_size - 1]);
+			}
 
-			// const_reference back() const
-			// {
-			// 	for(int i = 0; i < _size; i++)
-			// 	{}
-			// 	return (_arr[i]);
-			// }
+			const_reference back() const
+			{
+				return (_arr[_size - 1]);
+			}
 			
 			bool empty() const
 			{
@@ -184,11 +183,55 @@ namespace ft
 				alloc.deallocate(_arr, _capacity);
 				_size = 0;
 			}
+
+			void pop_back()
+			{
+				if (_size > 0)
+				{
+					_size--;
+					alloc.destroy(_arr[_size - 1]);
+				}
+			}
+			
 			//////////////////////// OPERATORS /////////////////////////////
 			T const & operator[](size_type n) const { return (_arr[n]); }
 			T & operator[](size_type n) { return (_arr[n]); }
 			
 			//////////////////////// ITERATORS /////////////////////////////
+			class iterator
+			{
+				private:;
+					T *data;
+				public:
+					iterator(T *ptr): data(ptr) {};
+					iterator(const iterator &src) { data = src.data; };
+					~iterator() {};
+			}
+
+			iterator begin()
+			{
+				return iterator(_arr);
+			}
+
+			const_iterator begin() const
+			{
+				return iterator(_arr);
+			}
+
+			iterator end()
+			{
+				return iterator(_arr + _size);
+			}
+			
+			const_iterator end() const
+			{
+				return iterator(_arr + _size);
+			}
+
+			
+
+
+			
 	};
 }
 

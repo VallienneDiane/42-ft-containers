@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vallienne <vallienne@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2022/12/19 15:50:15 by dvallien         ###   ########.fr       */
+/*   Updated: 2022/12/20 12:03:52 by vallienne        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 int main(void)
 {
-	ft::vector<int> test;
-	// std::vector<int> test;
+	// ft::vector<int> test;
+	std::vector<int> test;
 
 	int i = 0;
 	for (int j = 15; j < 25; j++)
@@ -28,7 +28,9 @@ int main(void)
 	}
 	std::cout << "size " << test.size() << std::endl;
 	std::cout << "capacity " << test.capacity() << std::endl;
-	test.clear();
+	std::cout << "avant " << test.back() << std::endl;
+	test.resize(13);
+	std::cout << "apres " << test.back() << std::endl;
 	std::cout << "size " << test.size() << std::endl;
 	std::cout << "capacity " << test.capacity() << std::endl;
 	// test.resize(16);

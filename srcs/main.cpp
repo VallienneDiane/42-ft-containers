@@ -6,7 +6,7 @@
 /*   By: vallienne <vallienne@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2022/12/20 12:03:52 by vallienne        ###   ########.fr       */
+/*   Updated: 2023/01/03 18:26:53 by vallienne        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,27 @@ int main(void)
 {
 	// ft::vector<int> test;
 	std::vector<int> test;
+	std::vector<int> test2;
 
 	int i = 0;
 	for (int j = 15; j < 25; j++)
 	{
 		test.push_back(j);
-		// std::cout << i << ' ' << test[i] << std::endl;
+		std::cout << "test " << ' ' << test[i] << std::endl;
 		i++;
 	}
-	std::cout << "size " << test.size() << std::endl;
-	std::cout << "capacity " << test.capacity() << std::endl;
-	std::cout << "avant " << test.back() << std::endl;
-	test.resize(13);
-	std::cout << "apres " << test.back() << std::endl;
-	std::cout << "size " << test.size() << std::endl;
-	std::cout << "capacity " << test.capacity() << std::endl;
+	i = 0;
+	for (int j = 86; j < 90; j++)
+	{
+		test2.push_back(j);
+		std::cout << "test2 " << ' ' << test2[i] << std::endl;
+		i++;
+	}
+	std::cout << "size test : " << test.size() << std::endl;
+	std::cout << "size test2 : " << test2.size() << std::endl;
+	test.swap(test2);
+	std::cout << "size test : " << test.size() << std::endl;
+	std::cout << "size test2 : " << test2.size() << std::endl;
 	// test.resize(16);
 	// test.pop_back();
 	// std::cout << "at " << test.at(9) << std::endl;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vallienne <vallienne@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:45:19 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/03 19:02:11 by vallienne        ###   ########.fr       */
+/*   Updated: 2023/01/04 17:23:16 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,46 +16,82 @@
 #include <memory>
 #include <string>
 #include <stdexcept>
+#include "../iterator/reverse_iterator.hpp"
 
 ////// VECTOR IS A SEQUENCE CONTAINER AND KNOWN AS A DYNAMIC ARRAY OR ARRAY LIST ////////
 namespace ft 
 {
-	template <typename T, class Allocator = std::allocator<T> >
-	
+	template <class T, class Alloc = std::allocator<T> >
+
 	class vector
 	{
+		public:
+			typedef T											value_type;
+			typedef Alloc										allocator_type;
+			typedef	typename allocator_type::reference			reference;
+			typedef	typename allocator_type::const_reference	const_reference;
+			typedef value_type*                   				iterator; // template < class Iterator >
+    		typedef const value_type*                   		const_iterator;
+    		typedef typename allocator_type::size_type       	size_type;
+    		typedef typename allocator_type::difference_type 	difference_type;
+    		typedef typename allocator_type::pointer         	pointer;
+    		typedef typename allocator_type::const_pointer   	const_pointer;
+    		typedef	ft::reverse_iterator<iterator>          	reverse_iterator;
+    		typedef ft::reverse_iterator<const_iterator>    	const_reverse_iterator;
+
 		private:
-			typedef T			value_type;
-			typedef T*			pointer;
-			typedef	T&			reference;
-			typedef	T const &	const_reference;
-			typedef	size_t		size_type;
-			Allocator 			alloc;
+			Alloc				_alloc;
 			value_type			*_arr;
-			size_type			_size; 		// number of elements
-			size_type			_capacity;	// size of allocated storage 
+			size_type			_size; 		//number of elements
+			size_type			_capacity;	//size of allocated storage
 			
 		public:
-			vector(void): _size(0), _capacity(1) {};
-			vector(const vector &src) { *this = src; };
+			//default constructor
+			explicit vector(const allocator_type& alloc = allocator_type()): _size(0), _capacity(1), _alloc(alloc) {};
+			//fill constructor
+			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()): _size(n), _capacity(n), _alloc(alloc)
+			{
+				_arr = _alloc.allocate(_capacity);
+				for(int i = 0; i < n; i++)
+				{
+					_alloc.construct(_arr + i, val);
+				}
+			};
+			//range constructor
+			template <class InputIterator> vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) 
+			{
+//TO DO
+			};
+			//copy constructor
+			vector(const vector &x) { *this = x; };
+			//destructor
 			~vector(void) {};
-
-			////////   OPERATOR =    //////////
-			vector & operator=(const vector &src) { _size = src._size; _capacity = src._capacity; return (*this); };
 			
+			////////   OPERATOR =    //////////
+			vector & operator=(const vector &src) 
+			{ 
+				_size = src._size; 
+				_capacity = src._capacity; 
+				return (*this); 
+			};
 			////////   OPERATOR []    //////////
-			reference operator[](size_type n) { return (_arr[n]); }
-			const_reference operator[](size_type n) const { return (_arr[n]); }
-
+			reference operator[](size_type n) 
+			{ 
+				return (_arr[n]); 
+			}
+			const_reference operator[](size_type n) const 
+			{ 
+				return (_arr[n]); 
+			}
 			////////////////////////    ITERATORS    //////////////////////////////
-			class iterator
+			class Iterator
 			{
 				private:
 					T *data;
 				public:
-					iterator(T *ptr): data(ptr) {};
-					iterator(const iterator &src) { data = src.data; };
-					~iterator() {};
+					Iterator(T *ptr): data(ptr) {};
+					Iterator(const Iterator &src) { data = src.data; };
+					~Iterator() {};
 				
 				// INCREMENT OR DECREMENT ITERATORS
 				iterator& operator++() //pre increment : returns a reference to the incremented object
@@ -84,29 +120,29 @@ namespace ft
 					return tmp;
 				}
 				// INDEX OPERATORS
-				T& operator[](int index)
+				reference operator[](int index)
 				{
 					return *(data + index); // or return *(data[index]);
 				}
 
-				T* operator->()
+				pointer operator->()
 				{
 					return (data);
 				}
 
-				T& operator*()
+				reference operator*()
 				{
 					return (*data);
 				}
 				// COMPARISON OPERATORS
 				bool operator==(const iterator& src) const
 				{
-					return (data == src.data);
+					return (data == src->data);
 				}
 				
 				bool operator!=(const iterator& src) const
 				{
-					return (data != src.data);
+					return (data != src->data);
 				}
 				
 				bool operator>=(const iterator &src) const
@@ -129,96 +165,34 @@ namespace ft
 				}
 			};
 
-
-			class reverse_iterator
-			{
-				private:
-					T *data;
-
-				public:
-					reverse_iterator(T* ptr): data(ptr) {};
-					reverse_iterator(const iterator &src) { data = src.data; };
-					~reverse_iterator(){};
-
-				// INCREMENT OR DECREMENT ITERATORS
-				reverse_iterator& operator++() //pre increment : returns a reference to the incremented object
-				{
-					data++;
-					return *this;
-				}
-
-				reverse_iterator operator++(int) //post increment : returns a copy of the original, unincremented object
-				{
-					reverse_iterator tmp = *this;
-					++(*this);
-					return tmp;
-				}
-				
-				reverse_iterator& operator--() //pre decrement
-				{
-					data--;
-					return *this;
-				}
-
-				reverse_iterator operator--(int) //post decrement
-				{
-					reverse_iterator tmp = *this;
-					--(*this);
-					return tmp;
-				}
-				// INDEX OPERATORS
-				T& operator[](int index)
-				{
-					return *(data + index); // or return *(data[index]);
-				}
-
-				T* operator->()
-				{
-					return (data);
-				}
-
-				T& operator*()
-				{
-					return (*data);
-				}
-				// COMPARISON OPERATORS
-				bool operator==(const reverse_iterator& src) const
-				{
-					return (data == src.data);
-				}
-				
-				bool operator!=(const reverse_iterator& src) const
-				{
-					return (data != src.data);
-				}
-				
-				bool operator>=(const reverse_iterator &src) const
-				{
-					return (data >= src->data);
-				}
-				
-				bool operator<=(const reverse_iterator &src) const
-				{
-					return (data <= src->data);
-				}
-				bool operator>(const reverse_iterator &src) const
-				{
-					return (data > src->data);
-				}
-				
-				bool operator<(const reverse_iterator &src) const
-				{
-					return (data < src->data);
-				}
-			};
-			
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			////////////////////////////////////    VECTOR MEMBER FUNCTIONS   ////////////////////////////////////////////
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			////////   ASSIGN    //////////
 // void assign (iterator first, iterator last);	
-// void assign (size_type n, const value_type& val);
+void assign (size_type n, const value_type& val)
+{
+	// si taille plus petite supprime le surplus
+	if(n < _size)
+	{
+		int i = 0
+		for(i; i < n; i++)
+		{
+			_arr[i] = val;
+		}
+		std::cout << "i : " << std::endl;
+		for(int j = i; j < _size; j++)
+		{
+			_alloc.destroy(_arr + j)
+		}
+	}
+	// si capacity trop petite clear et realloue
+	else if(n > _capacity)
+	{
+		
+	}
+}
 
 			////////   AT    //////////
 			reference at(size_type n)
@@ -250,10 +224,10 @@ namespace ft
 				return iterator(_arr);
 			}
 
-			// const_iterator begin() const
-			// {
-			// 	return iterator(_arr);
-			// }
+			const_iterator begin() const
+			{
+				return iterator(_arr);
+			}
 			
 			////////   CAPACITY    //////////
 			size_type capacity() const { return (_capacity); }
@@ -261,8 +235,8 @@ namespace ft
 			////////   CLEAR    //////////
 			void clear()
 			{
-				alloc.destroy(_arr);
-				alloc.deallocate(_arr, _capacity);
+				_alloc.destroy(_arr);
+				_alloc.deallocate(_arr, _capacity);
 				_size = 0;
 			}
 			////////   EMPTY    //////////
@@ -278,10 +252,10 @@ namespace ft
 				return iterator(_arr + _size);
 			}
 			
-			// const_iterator end() const
-			// {
-			// 	return iterator(_arr + _size);
-			// }
+			const_iterator end() const
+			{
+				return iterator(_arr + _size);
+			}
 			
 			////////   ERASE    //////////
 			
@@ -299,9 +273,10 @@ namespace ft
 				return (_arr[0]);
 			}
 			////////   GET ALLOCATOR    //////////
-
-// allocator_type get_allocator() const;
-
+			allocator_type get_allocator() const
+			{
+				return (this->_alloc);
+			}
 			////////   INSERT    //////////
 // iterator insert(iterator position, const value_type& val);
 
@@ -310,7 +285,7 @@ namespace ft
 // void insert(iterator position, InputIterator first, InputIterator last);
 
 			////////   MAX SIZE    //////////
-			size_type max_size() const { return (alloc.max_size()); }
+			size_type max_size() const { return (_alloc.max_size()); }
 
 			////////   POP BACK    //////////
 			void pop_back()
@@ -318,7 +293,7 @@ namespace ft
 				if (_size > 0)
 				{
 					_size--;
-					alloc.destroy(_arr[_size - 1]);
+					_alloc.destroy(_arr[_size - 1]);
 				}
 			}
 			////////   PUSH BACK    //////////
@@ -326,20 +301,20 @@ namespace ft
 			{
 				if (_size == 0)
 				{
-					_arr = alloc.allocate(_capacity);
-					alloc.construct(_arr + _size, value);
+					_arr = _alloc.allocate(_capacity);
+					_alloc.construct(_arr + _size, value);
 					_size++;
 				}
 				else if(_size < _capacity)
 				{
-					alloc.construct(_arr + _size, value);
+					_alloc.construct(_arr + _size, value);
 					_size++;
 				}
 				else if (_size == _capacity)
 				{
 					_capacity = _capacity * 2;
 					move_arr(_capacity); // move array to deallocate old arr
-					alloc.construct(_arr + _size, value);
+					_alloc.construct(_arr + _size, value);
 					_size++;
 				}
 			}
@@ -348,14 +323,14 @@ namespace ft
 			{
 				value_type	*new_arr;
 
-				new_arr = alloc.allocate(new_capacity);
+				new_arr = _alloc.allocate(new_capacity);
 				for(int i = 0; i < _size; i++)
 				{
-					alloc.construct(new_arr + i, _arr[i]);
-					alloc.destroy(_arr + i);
+					_alloc.construct(new_arr + i, _arr[i]);
+					_alloc.destroy(_arr + i);
 				}
-				alloc.destroy(_arr);
-				alloc.deallocate(_arr, _capacity);
+				_alloc.destroy(_arr);
+				_alloc.deallocate(_arr, _capacity);
 				_arr = new_arr;
 				_capacity = new_capacity;
 			}
@@ -384,14 +359,14 @@ namespace ft
 					else if(n < _size)
 					{
 						new_capacity = _capacity;
-						new_arr = alloc.allocate(new_capacity);
+						new_arr = _alloc.allocate(new_capacity);
 						for(int i = 0; i < n; i++)
 						{
-							alloc.construct(new_arr + i, _arr[i]);						
-							alloc.destroy(_arr + i);
+							_alloc.construct(new_arr + i, _arr[i]);						
+							_alloc.destroy(_arr + i);
 						}
-						alloc.destroy(_arr);
-						alloc.deallocate(_arr, _capacity);
+						_alloc.destroy(_arr);
+						_alloc.deallocate(_arr, _capacity);
 						_arr = new_arr;
 						_size = n;
 					}
@@ -401,12 +376,12 @@ namespace ft
 							new_capacity = n;
 						else
 							new_capacity = _capacity;
-						new_arr = alloc.allocate(new_capacity);
+						new_arr = _alloc.allocate(new_capacity);
 						for(int i = 0; i < _size; i++)
-							alloc.construct(new_arr + i, _arr[i]);
+							_alloc.construct(new_arr + i, _arr[i]);
 						for(int i = _size; i < n; i++)
 						{
-							alloc.construct(new_arr + i, val);
+							_alloc.construct(new_arr + i, val);
 							_size++;
 						}
 					}
@@ -428,7 +403,7 @@ namespace ft
 			////////   SWAP   //////////
 			void swap (vector& x)
 			{
-				vector& tmp;
+				vector tmp;
 
 				tmp = *this;
 				*this = x;

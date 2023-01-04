@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vallienne <vallienne@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/03 18:26:53 by vallienne        ###   ########.fr       */
+/*   Updated: 2023/01/04 15:41:06 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,36 @@
 
 int main(void)
 {
-	// ft::vector<int> test;
-	std::vector<int> test;
-	std::vector<int> test2;
+	ft::vector<int> test;
+	// std::vector<int> test;
+	// std::vector<int> test2;
 
 	int i = 0;
-	for (int j = 15; j < 25; j++)
+	for (int j = 5; j < 10; j++)
 	{
 		test.push_back(j);
-		std::cout << "test " << ' ' << test[i] << std::endl;
+		std::cout << "value : " << ' ' << test[i] << std::endl;
 		i++;
 	}
-	i = 0;
-	for (int j = 86; j < 90; j++)
-	{
-		test2.push_back(j);
-		std::cout << "test2 " << ' ' << test2[i] << std::endl;
-		i++;
-	}
-	std::cout << "size test : " << test.size() << std::endl;
-	std::cout << "size test2 : " << test2.size() << std::endl;
-	test.swap(test2);
-	std::cout << "size test : " << test.size() << std::endl;
-	std::cout << "size test2 : " << test2.size() << std::endl;
+	// i = 0;
+	// for (int j = 86; j < 90; j++)
+	// {
+	// 	test2.push_back(j);
+	// 	std::cout << "test2 " << ' ' << test2[i] << std::endl;
+	// 	i++;
+	// }
+	std::cout << "size : " << test.size() << std::endl;
+	std::cout << "capacity : " << test.capacity() << std::endl;
+	// test.assign(4,100);
+	std::cout << "at 0: "<< test.at(0) << std::endl;
+	std::cout << "at 1: "<< test.at(1) << std::endl;
+	std::cout << "at 2: "<< test.at(2) << std::endl;
+	std::cout << "at 3: "<< test.at(3) << std::endl;
+	std::cout << "at 4: "<< test.at(4) << std::endl;
+	std::cout << "at 5: "<< test.at(5) << std::endl;
+	std::cout << "size : " << test.size() << std::endl;
+	std::cout << "capacity : " << test.capacity() << std::endl;
+	// test.swap(test2);
 	// test.resize(16);
 	// test.pop_back();
 	// std::cout << "at " << test.at(9) << std::endl;

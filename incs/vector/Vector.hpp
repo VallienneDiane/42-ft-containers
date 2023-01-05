@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:45:19 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/04 17:23:16 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:49:16 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,33 @@
 #include <string>
 #include <stdexcept>
 #include "../iterator/reverse_iterator.hpp"
+#include "../iterator/iterator_traits.hpp"
 
-////// VECTOR IS A SEQUENCE CONTAINER AND KNOWN AS A DYNAMIC ARRAY OR ARRAY LIST ////////
+///////---------------------------- VECTOR IS A SEQUENCE CONTAINER AND KNOWN AS A DYNAMIC ARRAY ------------------------------------- /////////
+////// sequence containers refer to a group of container class templates in STL of C++ that implement storage of _data elements		 /////////
+////// deque and list are also sequence container																					/////////
+
 namespace ft 
 {
-	template <class T, class Alloc = std::allocator<T> >
-
+	template <class T, class Allocator = std::allocator<T> >
 	class vector
 	{
 		public:
-			typedef T											value_type;
-			typedef Alloc										allocator_type;
-			typedef	typename allocator_type::reference			reference;
-			typedef	typename allocator_type::const_reference	const_reference;
-			typedef value_type*                   				iterator; // template < class Iterator >
-    		typedef const value_type*                   		const_iterator;
-    		typedef typename allocator_type::size_type       	size_type;
-    		typedef typename allocator_type::difference_type 	difference_type;
-    		typedef typename allocator_type::pointer         	pointer;
-    		typedef typename allocator_type::const_pointer   	const_pointer;
-    		typedef	ft::reverse_iterator<iterator>          	reverse_iterator;
-    		typedef ft::reverse_iterator<const_iterator>    	const_reverse_iterator;
+			typedef T												value_type;
+			typedef Allocator										allocator_type;
+			typedef	typename Allocator::reference					reference;
+			typedef	typename Allocator::const_reference				const_reference;
+			typedef value_type*                   					iterator; //template <class Iter>
+    		typedef const value_type*                   			const_iterator;
+    		typedef typename Allocator::size_type       			size_type;
+    		typedef typename Allocator::difference_type 			difference_type;
+    		typedef typename Allocator::pointer         			pointer;
+    		typedef typename Allocator::const_pointer   			const_pointer;
+    		// typedef	typename ft::reverse_iterator<iterator>        reverse_iterator;
+    		// typedef typename ft::reverse_iterator<const_iterator>  const_reverse_iterator;
 
 		private:
-			Alloc				_alloc;
+			Allocator			_alloc;
 			value_type			*_arr;
 			size_type			_size; 		//number of elements
 			size_type			_capacity;	//size of allocated storage
@@ -61,6 +64,7 @@ namespace ft
 			template <class InputIterator> vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) 
 			{
 //TO DO
+				// ft::iterator_traits<InputIterator>::reference ref = *first;
 			};
 			//copy constructor
 			vector(const vector &x) { *this = x; };
@@ -87,16 +91,17 @@ namespace ft
 			class Iterator
 			{
 				private:
-					T *data;
+					T *_data;
+					
 				public:
-					Iterator(T *ptr): data(ptr) {};
-					Iterator(const Iterator &src) { data = src.data; };
+					Iterator(T *ptr): _data(ptr) {};
+					Iterator(const Iterator &src) { _data = src._data; };
 					~Iterator() {};
 				
 				// INCREMENT OR DECREMENT ITERATORS
 				iterator& operator++() //pre increment : returns a reference to the incremented object
 				{
-					data++;
+					_data++;
 					return *this;
 				}
 
@@ -109,7 +114,7 @@ namespace ft
 				
 				iterator& operator--() //pre decrement
 				{
-					data--;
+					_data--;
 					return *this;
 				}
 
@@ -122,46 +127,46 @@ namespace ft
 				// INDEX OPERATORS
 				reference operator[](int index)
 				{
-					return *(data + index); // or return *(data[index]);
+					return *(_data + index); // or return *(_data[index]);
 				}
 
 				pointer operator->()
 				{
-					return (data);
+					return (_data);
 				}
 
 				reference operator*()
 				{
-					return (*data);
+					return (*_data);
 				}
 				// COMPARISON OPERATORS
 				bool operator==(const iterator& src) const
 				{
-					return (data == src->data);
+					return (_data == src->_data);
 				}
 				
 				bool operator!=(const iterator& src) const
 				{
-					return (data != src->data);
+					return (_data != src->_data);
 				}
 				
 				bool operator>=(const iterator &src) const
 				{
-					return (data >= src->data);
+					return (_data >= src->_data);
 				}
 				
 				bool operator<=(const iterator &src) const
 				{
-					return (data <= src->data);
+					return (_data <= src->_data);
 				}
 				bool operator>(const iterator &src) const
 				{
-					return (data > src->data);
+					return (_data > src->_data);
 				}
 				
 				bool operator<(const iterator &src) const
 				{
-					return (data < src->data);
+					return (_data < src->_data);
 				}
 			};
 
@@ -176,7 +181,7 @@ void assign (size_type n, const value_type& val)
 	// si taille plus petite supprime le surplus
 	if(n < _size)
 	{
-		int i = 0
+		int i = 0;
 		for(i; i < n; i++)
 		{
 			_arr[i] = val;
@@ -184,7 +189,7 @@ void assign (size_type n, const value_type& val)
 		std::cout << "i : " << std::endl;
 		for(int j = i; j < _size; j++)
 		{
-			_alloc.destroy(_arr + j)
+			_alloc.destroy(_arr + j);
 		}
 	}
 	// si capacity trop petite clear et realloue

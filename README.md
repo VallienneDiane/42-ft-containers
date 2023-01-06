@@ -1,10 +1,15 @@
 # Implement containers : vector, map and stack
 
-<p align="center">
-<img src="https://iq.opengenus.org/content/images/2019/05/c1.JPG" width="400">
-<img src="https://i.stack.imgur.com/3gBcx.png" width="400">
-</p>
+A container is a holder object that stores a collection of other objects (its elements). They are implemented as class templates, which allows a great flexibility in the types supported as elements.
 
+The container manages the storage space for its elements and provides member functions to access them, either directly or through iterators (reference objects with similar properties to pointers).
+
+Containers replicate structures very commonly used in programming: dynamic arrays (vector), queues (queue), stacks (stack), heaps (priority_queue), linked lists (list), trees (set), associative arrays (map)...
+
+<p align="center">
+<img src="https://iq.opengenus.org/content/images/2019/05/c1.JPG" width="500">
+<img src="https://i.stack.imgur.com/3gBcx.png" width="500">
+</p>
 
 ## Vector
 
@@ -17,12 +22,29 @@ But unlike arrays, their size can change dynamically, with their storage being h
 <img src="https://www.mycplus.com/mycplus/wp-content/uploads/2018/03/vectors.jpg" width="500">
 </p>
 
+## Allocators
 
-## General use cases for C++ containers
+Allocators are objects responsible for encapsulating memory management. 
 
-<p align="center">
-<img src="https://i.stack.imgur.com/HNMy4.png" width="900">
-</p>
+std::allocator is used when you want to separate allocation and do construction in two steps. 
+It is also used when separate destruction and deallocation is done in two steps. 
+
+All the STL containers in C++ have a type parameter Allocator that is by default std::allocator.
+	template <class T> class allocator;
+
+Member functions associated with std::allocator() :
+
+	address: It is used for obtaining the address of an object although it is removed in C++20.
+
+	construct: It is used to construct an object.It is also removed in C++20.
+
+	destroy: It is used to destruct an object in allocated storage.It is also removed in C++20.
+
+	max_size: It returns the largest supported allocation size.It is deprecated in C++17 and removed in C++20.
+
+	allocate: Used for allocation of memory.
+
+	deallocate: Used for deallocation of memory.
 
 ## Iterators
 
@@ -43,6 +65,12 @@ It produces a new iterator that moves from the end to the beginning of the seque
 </p>
 
 
+## General use cases for C++ containers
+
+<p align="center">
+<img src="https://i.stack.imgur.com/HNMy4.png" width="900">
+</p>
+
 
 ## Sources
 
@@ -56,6 +84,7 @@ https://cplusplus.com/reference/iterator/
 allocator
 https://cplusplus.com/reference/memory/allocator/
 https://medium.com/@vgasparyan1995/what-is-an-allocator-c8df15a93ed
+https://www.geeksforgeeks.org/stdallocator-in-cpp-with-examples/
 
 size & capacity & max_size
 https://www.fluentcpp.com/2017/10/13/size-capacity-stl-containers/

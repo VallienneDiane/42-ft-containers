@@ -20,7 +20,7 @@ But unlike arrays, their size can change dynamically, with their storage being h
 ## General use cases for C++ containers
 
 <p align="center">
-<img src="https://i.stack.imgur.com/HNMy4.png" width="800">
+<img src="https://i.stack.imgur.com/HNMy4.png" width="900">
 </p>
 
 ## Iterators
@@ -38,7 +38,7 @@ Reverse_iterator is an iterator adaptor that reverses the direction of a given i
 It produces a new iterator that moves from the end to the beginning of the sequence defined by the underlying bidirectional iterator.
 
 <p align="center">
-<img src="https://i.stack.imgur.com/5p7DE.png" width="300">
+<img src="https://i.stack.imgur.com/5p7DE.png" width="400">
 </p>
 
 

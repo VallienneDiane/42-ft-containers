@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/05 14:06:43 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:00:46 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 int main(void)
 {
-	ft::vector<int> test;
-	// std::vector<int> test;
+	// ft::vector<int> test;
+	std::vector<int> test;
 	// std::vector<int> test2;
 
 	int i = 0;

@@ -38,7 +38,7 @@ Reverse_iterator is an iterator adaptor that reverses the direction of a given i
 It produces a new iterator that moves from the end to the beginning of the sequence defined by the underlying bidirectional iterator.
 
 <p align="center">
-<img src="https://i.stack.imgur.com/5p7DE.png" width="500">
+<img src="https://i.stack.imgur.com/5p7DE.png" width="300">
 </p>
 
 

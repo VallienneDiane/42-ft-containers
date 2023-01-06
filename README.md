@@ -20,25 +20,25 @@ But unlike arrays, their size can change dynamically, with their storage being h
 ## General use cases for C++ containers
 
 <p align="center">
-<img src="https://i.stack.imgur.com/HNMy4.png" width="500">
+<img src="https://i.stack.imgur.com/HNMy4.png" width="800">
 </p>
 
-## Iterator
+## Iterators
 
 An iterator is any object that, pointing to some element in a range of elements (such as an array or a container), has the ability to iterate through the elements of that range using a set of operators (such increment (++)).
 
-
+### Iterator_traits
 iterator_traits is a template class in the C++ Standard Library that provides a way to obtain information about the properties of an iterator type. It is defined in the <iterator> header.
 
 The iterator_traits template has a single template parameter, which is the type of the iterator. It defines several member types and constants that provide information about the iterator type, such as its value_type, difference_type, reference, pointer, and iterator_category.
 
-## Reverse iterator
+### Reverse iterator
 
 Reverse_iterator is an iterator adaptor that reverses the direction of a given iterator.
 It produces a new iterator that moves from the end to the beginning of the sequence defined by the underlying bidirectional iterator.
 
 <p align="center">
-<img src="https://json.nlohmann.me/images/range-rbegin-rend.svg" width="500">
+<img src="https://i.stack.imgur.com/5p7DE.png" width="500">
 </p>
 
 

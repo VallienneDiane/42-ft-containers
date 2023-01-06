@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:45:19 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/05 17:49:16 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/06 11:37:51 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ namespace ft
 			
 		public:
 			//default constructor
-			explicit vector(const allocator_type& alloc = allocator_type()): _size(0), _capacity(1), _alloc(alloc) {};
+			explicit vector(const allocator_type& alloc = allocator_type()): _size(0), _capacity(1), _alloc(alloc) {}
 			//fill constructor
 			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()): _size(n), _capacity(n), _alloc(alloc)
 			{
@@ -59,7 +59,7 @@ namespace ft
 				{
 					_alloc.construct(_arr + i, val);
 				}
-			};
+			}
 			//range constructor
 			template <class InputIterator> vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) 
 			{
@@ -67,9 +67,9 @@ namespace ft
 				// ft::iterator_traits<InputIterator>::reference ref = *first;
 			};
 			//copy constructor
-			vector(const vector &x) { *this = x; };
+			vector(const vector &x) { *this = x; }
 			//destructor
-			~vector(void) {};
+			~vector(void) {}
 			
 			////////   OPERATOR =    //////////
 			vector & operator=(const vector &src) 

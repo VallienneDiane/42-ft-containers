@@ -61,7 +61,7 @@ Reverse_iterator is an iterator adaptor that reverses the direction of a given i
 It produces a new iterator that moves from the end to the beginning of the sequence defined by the underlying bidirectional iterator.
 
 <p align="center">
-<img src="https://i.stack.imgur.com/5p7DE.png" width="400">
+<img src="https://upload.cppreference.com/mwiki/images/3/39/range-rbegin-rend.svg" width="400">
 </p>
 
 

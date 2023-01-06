@@ -6,14 +6,14 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/06 14:00:46 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:16:33 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <vector>
-#include "../incs/vector/Vector.hpp"
 #include <iterator>
+#include "../incs/vector.hpp"
 
 int main(void)
 {

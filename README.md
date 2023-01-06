@@ -64,6 +64,17 @@ It produces a new iterator that moves from the end to the beginning of the seque
 <img src="https://upload.cppreference.com/mwiki/images/3/39/range-rbegin-rend.svg" width="400">
 </p>
 
+## Enable_if
+
+The enable_if family of templates is a set of tools to allow a function template or a class template specialization to include or exclude itself from a set of matching functions or specializations based on properties of its template arguments.
+
+std::enable_if is an important function to enable certain types for template specialization via some predicates known at the compile time. Using types that are not enabled by std::enable_if for template specialization will result in compile-time error.
+
+If B is true, std::enable_if has a public member typedef type, equal to T; otherwise, there is no member typedef.
+
+## Is_integral
+
+std::integral_constant wraps a static constant of specified type. It is the base class for the C++ type traits.
 
 ## General use cases for C++ containers
 

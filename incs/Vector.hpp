@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:45:19 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/06 15:13:03 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:28:10 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@
 #include <string>
 #include <stdexcept>
 #include <iterator>
-#include "../iterator/reverse_iterator.hpp"
-#include "../iterator/iterator_traits.hpp"
+#include "reverse_iterator.hpp"
+#include "iterator_traits.hpp"
+#include "is_integral.hpp"
+#include "equal.hpp"
+#include "enable_if.hpp"
 ///////---------------------------- VECTOR IS A SEQUENCE CONTAINER AND KNOWN AS A DYNAMIC ARRAY ------------------------------------- /////////
 ////// sequence containers refer to a group of container class templates in STL of C++ that implement storage of _current elements		 /////////
 ////// deque and list are also sequence container																					/////////
@@ -55,13 +58,14 @@ namespace ft
 				for(int i = 0; i < n; i++)
 					_alloc.construct(_arr + i, val);
 			}
-			vector(const vector &x) { *this = x; }	//copy constructor
-			~vector(void) {} 						//destructor
-			template <class InputIterator> vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) //range constructor
+			template <class InputIterator> 
+			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<! ft::isIntegral<InputIterator>::value >::type* = 0) //range constructor
 			{
-// TO DO				// ft::iterator_traits<InputIterator>::reference ref = *first;
+//to do			// ft::iterator_traits<InputIterator>::reference ref = *first;
 			};
-			
+			vector(const vector &x) { *this = x; }	//copy constructor
+			~vector(void) {} //destructor
+
 			vector & operator=(const vector &src) { _size = src._size; _capacity = src._capacity; return (*this); };
 			reference operator[](size_type n) { return (_arr[n]); }
 			const_reference operator[](size_type n) const { return (_arr[n]); }
@@ -69,11 +73,11 @@ namespace ft
 			////////////////////////    MY ITERATOR    //////////////////////////////
 			////////////////////////////////////////////////////////////////////////
 			template <class Iterator>
-			class MyIterator: public std::iterator<std::input_iterator_tag, int>
+			class MyIterator
 			{
 				private:
 					Iterator _current;
-					
+				
 				public:
 					MyIterator(): _current(Iterator()) {};
 					MyIterator(const MyIterator &src): _current(src._current) {};

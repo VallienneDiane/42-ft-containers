@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_iterator.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vallienne <vallienne@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:50:04 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/06 15:14:25 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/08 18:41:53 by vallienne        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REVERSE_ITERATOR_HPP
 #define REVERSE_ITERATOR_HPP
-#include <iostream>
-#include <memory>
-#include <string>
-#include <stdexcept>
 #include "iterator_traits.hpp"
 #include "vector.hpp"
 

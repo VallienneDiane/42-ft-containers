@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   is_integral.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vallienne <vallienne@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:07:04 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/06 17:22:09 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/08 18:35:31 by vallienne        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IS_INTEGRAL_HPP
 #define IS_INTEGRAL_HPP
-#include "vector.hpp"
 
 namespace ft
 {
@@ -25,6 +24,7 @@ namespace ft
 		  
 		operator value_type() const { return (value); }
 	};
+	
 	typedef integral_constant<bool,true> true_type;
 	typedef integral_constant<bool,false> false_type;
 

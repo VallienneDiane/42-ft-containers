@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.hpp                                         :+:      :+:    :+:   */
+/*   Vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vallienne <vallienne@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:45:19 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/08 19:05:19 by vallienne        ###   ########.fr       */
+/*   Updated: 2023/01/09 15:49:08 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,35 @@
 #include <memory>
 #include <string>
 #include <stdexcept>
-// #include <iterator>
 #include "./reverse_iterator.hpp"
+#include "./iterator_vector.hpp"
 #include "./iterator_traits.hpp"
 #include "./is_integral.hpp"
 #include "./equal.hpp"
 #include "./enable_if.hpp"
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////---------------------------- VECTOR IS A SEQUENCE CONTAINER AND KNOWN AS A DYNAMIC ARRAY ------------------------------------- /////////
-////// sequence containers refer to a group of container class templates in STL of C++ that implement storage of _current elements		 /////////
+////// sequence containers refer to a group of container class templates in STL of C++ that implement storage of _current elements	 /////////
 ////// deque and list are also sequence container																					/////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace ft 
 {
 	template <class T, class Allocator = std::allocator<T> >
 	class vector
 	{
 		public:
-			typedef T												value_type;
-			typedef Allocator										allocator_type;
-			typedef	typename Allocator::reference					reference;
-			typedef	typename Allocator::const_reference				const_reference;
-			typedef value_type*                   					iterator; //template <class Iter>
-    		typedef const value_type*                   			const_iterator;
-    		typedef typename Allocator::size_type       			size_type;
-    		typedef typename Allocator::difference_type 			difference_type;
-    		typedef typename Allocator::pointer         			pointer;
-    		typedef typename Allocator::const_pointer   			const_pointer;
+			typedef T																					value_type;
+			typedef Allocator																			allocator_type;
+    		typedef typename Allocator::size_type       												size_type;
+    		typedef typename Allocator::difference_type 												difference_type;
+			typedef	typename Allocator::reference														reference;
+			typedef	typename Allocator::const_reference													const_reference;
+    		typedef typename Allocator::pointer         												pointer;
+    		typedef typename Allocator::const_pointer   												const_pointer;
+			typedef ft::my_iterator<value_type, difference_type, pointer, reference>						iterator;
+			typedef ft::my_iterator<value_type, difference_type, const_pointer, const_reference>			const_iterator;
+			typedef ft::reverse_iterator<iterator>														reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>												const_reverse_iterator;
 
 		private:
 			Allocator			_alloc;
@@ -61,86 +65,61 @@ namespace ft
 					typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type = NULL): _alloc(alloc) //range constructor
 			{
 //to do		
-			};
+			}
 			vector(const vector &x) { *this = x; }	//copy constructor
 			~vector(void) {} //destructor
 
 			vector & operator=(const vector &src) { _size = src._size; _capacity = src._capacity; return (*this); };
 			reference operator[](size_type n) { return (_arr[n]); }
 			const_reference operator[](size_type n) const { return (_arr[n]); }
-			//////////////////////////////////////////////////////////////////////////
-			////////////////////////    MY ITERATOR    //////////////////////////////
-			////////////////////////////////////////////////////////////////////////
-			template <class Iterator>
-			class MyIterator
-			{			
-				public:
-					typedef T         		value_type;
-    				typedef std::ptrdiff_t  difference_type;
-					typedef T*			 	pointer;
-					typedef T&				reference;
-					typedef Category  iterator_category;
-					
-				private:
-					Iterator _current;
-				
-				public:
-					MyIterator(): _current(Iterator()) {}
-					explicit MyIterator(value_type *ptr): _current(ptr) {}
-					MyIterator(const MyIterator &other): _current(other._current) {}
-					~MyIterator() {}
-				
-				// INCREMENT OR DECREMENT ITERATORS
-					//pre increment : returns a reference to the incremented object 
-					//post increment : returns a copy of the original, unincremented object
-				MyIterator& operator++() { ++_current; return (*this); }
-				MyIterator operator++(int) { MyIterator tmp = *this; (*this)++; return tmp; }
-				MyIterator& operator--() { --_current; return *this; }
-				MyIterator operator--(int){ MyIterator tmp = *this; (*this)--; return tmp; }
-				// INDEX OPERATORS
-				reference operator[](int index) { return *(_current + index); }
-				pointer operator->() { return (_current); }
-				reference operator*() { return (*_current); }
-				// COMPARISON OPERATORS
-				bool operator==(const MyIterator& rhs) const { return (_current == rhs._current); }
-				bool operator!=(const MyIterator& rhs) const { return (_current != rhs._current); }
-				bool operator>=(const MyIterator &rhs) const { return (_current >= rhs._current); }
-				bool operator<=(const MyIterator &rhs) const { return (_current <= rhs._current); }
-				bool operator>(const MyIterator &rhs) const { return (_current > rhs._current); }
-				bool operator<(const MyIterator &rhs) const { return (_current < rhs._current); }
-			};
-			
-			typedef MyIterator								iterator;
-			// typedef MyConstIterator							const_iterator;
-			typedef ft::reverse_iterator<iterator>			reverse_iterator;
-			// typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 			////////////////////////////////////    VECTOR MEMBER FUNCTIONS   ////////////////////////////////////////////
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			
 			////////   ASSIGN    //////////
-// void assign (iterator first, iterator last);	
-void assign (size_type n, const value_type& val)
-{
-	// si taille plus petite supprime le surplus
-	if(n < _size)
-	{
-		for(int i = 0; i < n; i++)
-		{
-			_arr[i] = val;
-		}
-		std::cout << "i : " << std::endl;
-		for(int j = n; j < _size; j++)
-		{
-			_alloc.destroy(_arr + j);
-		}
-	}
-	// si capacity trop petite clear et realloue
-	else if(n > _capacity)
-	{
-		
-	}
-}
+			template <class InputIterator>
+			void assign(InputIterator first, InputIterator last)
+			{
+				// size_type	diff = 0;
+
+				// for(InputIterator tmp = first; tmp != last; tmp++)
+				// {
+				// 	diff++;
+				// std::cout << "f " << *first << std::endl;
+				// std::cout << "l " << *last << std::endl;
+				// std::cout << "t " << *tmp << std::endl;
+				// }
+				// std::cout << "diff " << diff << std::endl;
+				// _arr = _alloc.allocate(_capacity);
+				
+				// for(; first != last; *first++)
+				// {
+				// 	_alloc.construct(_arr + first, *first);
+
+					
+				// }
+			}
+			void assign(size_type n, const value_type& val)
+			{
+				try
+				{
+					if(n < _size)//if size smaller than n, suppr the extra
+					{
+						for(int i = 0; i < n; i++)
+							_alloc.construct(_arr + i, val);
+						for(int j = n; j < _size; j++)
+							_alloc.destroy(_arr + j);
+						_size = n;
+					}
+					else if(n > _capacity)//if capacity too low reallocate
+					{
+						reserve(n);
+						_size = _capacity;
+					}
+				}
+				catch(const std::length_error& e)
+				{
+					throw std::length_error("vector");
+				}
+			}
 			////////   AT    //////////
 			reference at(size_type n)
 			{
@@ -248,7 +227,16 @@ void assign (size_type n, const value_type& val)
 			const_reverse_iterator rend() const { return const_reverse_iterator(begin()); };
 			
 			////////   RESERVE   //////////
-// void reserve (size_type n);
+			void reserve (size_type new_cap)
+			{
+				if(new_cap > _capacity)
+				{
+					if(new_cap > max_size())
+						throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
+					_capacity = new_cap;
+					_arr = _alloc.allocate(_capacity);
+				}
+			}
 			////////   RESIZE   //////////
 			void resize (size_type n, value_type val = value_type())
 			{

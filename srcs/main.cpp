@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/06 15:16:33 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:22:06 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,41 +17,71 @@
 
 int main(void)
 {
-	// ft::vector<int> test;
-	std::vector<int> test;
-	// std::vector<int> test2;
-
+	std::cout << " -------------- FT::VECTOR --------------- " << std::endl;
+	ft::vector<int> test;
+	ft::vector<int>::iterator it;
+	ft::vector<int>::iterator itbis;
+	
 	int i = 0;
 	for (int j = 5; j < 10; j++)
 	{
 		test.push_back(j);
-		std::cout << "value : " << ' ' << test[i] << std::endl;
 		i++;
+		// std::cout << "ft::vector  value : " << ' ' << test[i] << std::endl;
 	}
-	// i = 0;
-	// for (int j = 86; j < 90; j++)
-	// {
-	// 	test2.push_back(j);
-	// 	std::cout << "test2 " << ' ' << test2[i] << std::endl;
-	// 	i++;
-	// }
-	std::cout << "size : " << test.size() << std::endl;
-	std::cout << "capacity : " << test.capacity() << std::endl;
-	// test.assign(4,100);
-	std::cout << "at 0: "<< test.at(0) << std::endl;
-	std::cout << "at 1: "<< test.at(1) << std::endl;
-	std::cout << "at 2: "<< test.at(2) << std::endl;
-	std::cout << "at 3: "<< test.at(3) << std::endl;
-	std::cout << "at 4: "<< test.at(4) << std::endl;
-	std::cout << "at 5: "<< test.at(5) << std::endl;
-	std::cout << "size : " << test.size() << std::endl;
-	std::cout << "capacity : " << test.capacity() << std::endl;
-	// test.swap(test2);
-	// test.resize(16);
-	// test.pop_back();
-	// std::cout << "at " << test.at(9) << std::endl;
-	// std::cout << "max size " << test.max_size() << std::endl;
+	it = test.begin();
+	itbis = test.begin()+2;
+	it+=2;
+	std::cout << "it       : " << *(it) << std::endl;
+	std::cout << "it bis   : " << *(itbis) << std::endl;
+	std::cout << "operator : " << (it == itbis) << std::endl;
+	
+	// std::cout << "size : " << test.size() << std::endl;
+	// std::cout << "capacity : " << test.capacity() << std::endl;
+	// std::cout << "at 0: "<< test.at(0) << std::endl;
+	// std::cout << "at 1: "<< test.at(1) << std::endl;
+	// std::cout << "at 2: "<< test.at(2) << std::endl;
+	// std::cout << "at 3: "<< test.at(3) << std::endl;
+	// std::cout << "at 4: "<< test.at(4) << std::endl;
+	// test.assign(it, test.end()-1);
+	// std::cout << "size : " << test.size() << std::endl;
+	// std::cout << "capacity : " << test.capacity() << std::endl;
+	
+////////////////////////////////////////////////////////////////////////////////////
+	std::cout << " -------------- STD::VECTOR --------------- " << std::endl;
+	std::vector<int> test2;
+	std::vector<int>::iterator it2;
+	std::vector<int>::iterator it2bis;
+	
+	i = 0;
+	for (int j = 5; j < 10; j++)
+	{
+		test2.push_back(j);
+		i++;
+		// std::cout << "std::vector value : " << ' ' << test2[i] << std::endl;
+	}
+		
+	it2 = test2.begin();
+	it2bis = test2.begin()+2;
+	it2+=2;
+	std::cout << "it2       : " << *(it2) << std::endl;
+	std::cout << "it2 bis   : " << *(it2bis) << std::endl;
+	std::cout << "operator : " << (it2 == it2bis) << std::endl;
+	// std::cout << "size : " << test2.size() << std::endl;
+	// std::cout << "capacity : " << test2.capacity() << std::endl;
+	// std::cout << "at 0: "<< test2.at(0) << std::endl;
+	// std::cout << "at 1: "<< test2.at(1) << std::endl;
+	// std::cout << "at 2: "<< test2.at(2) << std::endl;
+	// std::cout << "at 3: "<< test2.at(3) << std::endl;
+	// std::cout << "at 4: "<< test2.at(4) << std::endl;
+	// test2.assign(it2, test2.end()-1);
+	// std::cout << "size : " << test2.size() << std::endl;
+	// std::cout << "capacity : " << test2.capacity() << std::endl;
 }
+
+// test.swap(test2);
+// test.resize(16);
+// test.pop_back();
 
 
 // #include <string>

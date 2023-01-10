@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 10:44:12 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/09 16:29:51 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/10 10:51:04 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,12 @@ namespace ft
 		my_iterator& operator++() { _current++; return (*this); }
 		my_iterator operator++(int) { my_iterator tmp = *this; ++(*this); return tmp; }
 		my_iterator operator+(difference_type n) const { return my_iterator(_current + n); }
-		//my_iterator& operator+=(difference_type n) { return my_iterator(_current + n); }
+		my_iterator& operator+=(difference_type n) { _current += n; return (*this); }
 		
 		my_iterator& operator--() { _current--; return (*this); }
 		my_iterator operator--(int){ my_iterator tmp = *this; --(*this); return tmp; }
 		my_iterator operator-(difference_type n) const { return my_iterator(_current - n); }
+		my_iterator& operator-=(difference_type n) { _current -= n; return (*this); }
 		// INDEX OPERATORS
 		reference operator[](int index) { return *(_current + index); }
 		pointer operator->() { return (_current); }

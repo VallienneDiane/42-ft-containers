@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/09 16:22:06 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:17:04 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@
 
 int main(void)
 {
-	std::cout << " -------------- FT::VECTOR --------------- " << std::endl;
-	ft::vector<int> test;
-	ft::vector<int>::iterator it;
-	ft::vector<int>::iterator itbis;
+	// std::cout << " -------------- FT::VECTOR --------------- " << std::endl;
+	// ft::vector<int> test;
+	// ft::vector<int>::iterator it;
+	// ft::vector<int>::iterator itbis;
 	
-	int i = 0;
-	for (int j = 5; j < 10; j++)
-	{
-		test.push_back(j);
-		i++;
-		// std::cout << "ft::vector  value : " << ' ' << test[i] << std::endl;
-	}
-	it = test.begin();
-	itbis = test.begin()+2;
-	it+=2;
-	std::cout << "it       : " << *(it) << std::endl;
-	std::cout << "it bis   : " << *(itbis) << std::endl;
-	std::cout << "operator : " << (it == itbis) << std::endl;
+	// int i = 0;
+	// for (int j = 5; j < 10; j++)
+	// {
+	// 	test.push_back(j);
+	// 	i++;
+	// 	// std::cout << "ft::vector  value : " << ' ' << test[i] << std::endl;
+	// }
+	// it = test.begin();
+	// itbis = test.begin()+5;
+	// it[1];
+	// std::cout << "it       : " << *(it) << std::endl;
+	// std::cout << "it bis   : " << *(itbis) << std::endl;
+	// std::cout << "operator : " << (it <= itbis) << std::endl;
 	
 	// std::cout << "size : " << test.size() << std::endl;
 	// std::cout << "capacity : " << test.capacity() << std::endl;
@@ -48,27 +48,30 @@ int main(void)
 	// std::cout << "capacity : " << test.capacity() << std::endl;
 	
 ////////////////////////////////////////////////////////////////////////////////////
-	std::cout << " -------------- STD::VECTOR --------------- " << std::endl;
-	std::vector<int> test2;
-	std::vector<int>::iterator it2;
-	std::vector<int>::iterator it2bis;
+	// std::cout << " -------------- STD::VECTOR --------------- " << std::endl;
+	// std::vector<int> test2;
 	
-	i = 0;
+	std::cout << " -------------- FT::VECTOR --------------- " << std::endl;
+	ft::vector<int> test2;
+	
+	// i = 0;
+	int i = 0;
 	for (int j = 5; j < 10; j++)
 	{
 		test2.push_back(j);
 		i++;
-		// std::cout << "std::vector value : " << ' ' << test2[i] << std::endl;
 	}
-		
-	it2 = test2.begin();
-	it2bis = test2.begin()+2;
-	it2+=2;
-	std::cout << "it2       : " << *(it2) << std::endl;
-	std::cout << "it2 bis   : " << *(it2bis) << std::endl;
-	std::cout << "operator : " << (it2 == it2bis) << std::endl;
-	// std::cout << "size : " << test2.size() << std::endl;
-	// std::cout << "capacity : " << test2.capacity() << std::endl;
+	// std::vector<int>::iterator it2;
+	// std::vector<int>::iterator it2bis;
+	ft::vector<int>::iterator it2;
+	ft::vector<int>::iterator it2bis;
+
+	it2=test2.begin()+1;
+	test2.assign(it2, it2+8);
+	std::cout << "size : " << test2.size() << std::endl;
+	std::cout << "capacity : " << test2.capacity() << std::endl;
+
+	
 	// std::cout << "at 0: "<< test2.at(0) << std::endl;
 	// std::cout << "at 1: "<< test2.at(1) << std::endl;
 	// std::cout << "at 2: "<< test2.at(2) << std::endl;
@@ -79,9 +82,18 @@ int main(void)
 	// std::cout << "capacity : " << test2.capacity() << std::endl;
 }
 
-// test.swap(test2);
-// test.resize(16);
-// test.pop_back();
+	// it2 = test2.begin();
+	// it2bis = test2.begin()+5;
+	// it2 = test2.rbegin();
+	// it2bis = test2.rbegin()+5;
+	// 8 + it2; //operator+ non membre
+	// it2 + 8; //operator+ membre
+	// std::cout << "it2       : " << *(it2) << std::endl;
+	// std::cout << "it2 bis   : " << *(it2bis) << std::endl;
+	// std::cout << "operator : " << (it2 >= it2bis) << std::endl;
+	// test.swap(test2);
+	// test.resize(16);
+	// test.pop_back();
 
 
 // #include <string>

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Vector.hpp                                         :+:      :+:    :+:   */
+/*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:45:19 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/09 15:49:08 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:46:07 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ namespace ft
 	class vector
 	{
 		public:
-			typedef T																					value_type;
-			typedef Allocator																			allocator_type;
-    		typedef typename Allocator::size_type       												size_type;
-    		typedef typename Allocator::difference_type 												difference_type;
-			typedef	typename Allocator::reference														reference;
-			typedef	typename Allocator::const_reference													const_reference;
-    		typedef typename Allocator::pointer         												pointer;
-    		typedef typename Allocator::const_pointer   												const_pointer;
-			typedef ft::my_iterator<value_type, difference_type, pointer, reference>						iterator;
-			typedef ft::my_iterator<value_type, difference_type, const_pointer, const_reference>			const_iterator;
-			typedef ft::reverse_iterator<iterator>														reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator>												const_reverse_iterator;
+			typedef T																							value_type;
+			typedef Allocator																					allocator_type;
+    		typedef typename Allocator::size_type       														size_type;
+    		typedef typename Allocator::difference_type 														difference_type;
+			typedef	typename Allocator::reference																reference;
+			typedef	typename Allocator::const_reference															const_reference;
+    		typedef typename Allocator::pointer         														pointer;
+    		typedef typename Allocator::const_pointer   														const_pointer;
+			typedef typename ft::my_iterator<value_type, difference_type, pointer, reference>					iterator;
+			typedef typename ft::my_iterator<value_type, difference_type, const_pointer, const_reference>		const_iterator;
+			typedef typename ft::reverse_iterator<iterator>														reverse_iterator;
+			typedef typename ft::reverse_iterator<const_iterator>												const_reverse_iterator;
 
 		private:
 			Allocator			_alloc;
@@ -78,24 +78,31 @@ namespace ft
 			template <class InputIterator>
 			void assign(InputIterator first, InputIterator last)
 			{
-				// size_type	diff = 0;
+				size_type	dist = 0;
 
-				// for(InputIterator tmp = first; tmp != last; tmp++)
-				// {
-				// 	diff++;
-				// std::cout << "f " << *first << std::endl;
-				// std::cout << "l " << *last << std::endl;
-				// std::cout << "t " << *tmp << std::endl;
-				// }
-				// std::cout << "diff " << diff << std::endl;
-				// _arr = _alloc.allocate(_capacity);
-				
-				// for(; first != last; *first++)
-				// {
-				// 	_alloc.construct(_arr + first, *first);
-
-					
-				// }
+				for(InputIterator tmp = first; tmp != last; tmp++)
+				{
+					dist++;
+					_size++;
+				}
+				_capacity = dist;					
+				_arr = _alloc.allocate(_capacity);
+				for(InputIterator tmp = first; tmp != last; tmp++)
+				{
+					if(dist < _size)
+					{
+						for(int i = 0; i < dist; i++)
+							_alloc.construct(_arr + i, *tmp);
+						for(int j = dist; j < _size; j++)
+							_alloc.destroy(_arr + j);
+						_size = dist;
+					}
+					else if(dist > _capacity)//if capacity too low reallocate
+					{
+						reserve(dist);
+						_size = _capacity;
+					}
+				}
 			}
 			void assign(size_type n, const value_type& val)
 			{
@@ -159,8 +166,24 @@ namespace ft
 			iterator end() { return iterator(_arr + _size); }
 			const_iterator end() const { return iterator(_arr + _size); }
 			////////   ERASE    //////////
-// iterator erase (iterator position);
-// iterator erase (iterator first, iterator last);
+			// iterator erase (iterator position)
+			// {
+			// 	_alloc.destroy(_arr[position]);
+			// 	_size--;
+			// 	for(size_type i = position; i < _arr.end(); i++)
+			// 	{
+					
+			// 	}					
+			// }
+			
+			// iterator erase (iterator first, iterator last)
+			// {
+			// 	for(iterator tmp = first; tmp != last; tmp++)
+			// 	{
+			// 		_alloc.destroy(_arr[tmp]);
+			// 		_size--;
+			// 	}
+			// }
 			////////   FRONT   //////////
 			reference front(){ return (_arr[0]); }
 			const_reference front() const { return (_arr[0]); }

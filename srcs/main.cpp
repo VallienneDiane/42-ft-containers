@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/10 16:17:04 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/11 18:10:58 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,69 +17,56 @@
 
 int main(void)
 {
-	// std::cout << " -------------- FT::VECTOR --------------- " << std::endl;
-	// ft::vector<int> test;
-	// ft::vector<int>::iterator it;
-	// ft::vector<int>::iterator itbis;
+	std::cout << " -------------- FT::VECTOR --------------- " << std::endl;
+
+	ft::vector<int> test;
+	for (int j = 0; j < 15; j++)
+	{
+		test.push_back(j);
+	}
+
+	ft::vector<int> test3;
+	test3.assign(test.begin(), test.end());
+
+	// ft::vector<int> test3(test.begin(), test.end()-1);
+	// if(test == test3)
+	// 	std::cout << "YEPPPP " << std::endl;
+	// else
+	// 	std::cout << "NOOOOPE " << std::endl;
 	
-	// int i = 0;
-	// for (int j = 5; j < 10; j++)
-	// {
-	// 	test.push_back(j);
-	// 	i++;
-	// 	// std::cout << "ft::vector  value : " << ' ' << test[i] << std::endl;
-	// }
-	// it = test.begin();
-	// itbis = test.begin()+5;
-	// it[1];
-	// std::cout << "it       : " << *(it) << std::endl;
-	// std::cout << "it bis   : " << *(itbis) << std::endl;
-	// std::cout << "operator : " << (it <= itbis) << std::endl;
-	
-	// std::cout << "size : " << test.size() << std::endl;
-	// std::cout << "capacity : " << test.capacity() << std::endl;
-	// std::cout << "at 0: "<< test.at(0) << std::endl;
-	// std::cout << "at 1: "<< test.at(1) << std::endl;
-	// std::cout << "at 2: "<< test.at(2) << std::endl;
-	// std::cout << "at 3: "<< test.at(3) << std::endl;
-	// std::cout << "at 4: "<< test.at(4) << std::endl;
+	std::cout << "size : " << test3.size() << std::endl;
+	std::cout << "capacity : " << test3.capacity() << std::endl;
+
+	for(int i = 0; i < test3.size(); i++)
+		std::cout << "at " << i << ": " << test3.at(i) << std::endl;
+
+	// std::cout << "at 10: " << test.at(10) << std::endl;
 	// test.assign(it, test.end()-1);
 	// std::cout << "size : " << test.size() << std::endl;
 	// std::cout << "capacity : " << test.capacity() << std::endl;
 	
 ////////////////////////////////////////////////////////////////////////////////////
-	// std::cout << " -------------- STD::VECTOR --------------- " << std::endl;
-	// std::vector<int> test2;
+	std::cout << " -------------- STD::VECTOR --------------- " << std::endl;
 	
-	std::cout << " -------------- FT::VECTOR --------------- " << std::endl;
-	ft::vector<int> test2;
-	
-	// i = 0;
-	int i = 0;
-	for (int j = 5; j < 10; j++)
+	std::vector<int> test2;
+	for (int j = 0; j < 15; j++)
 	{
 		test2.push_back(j);
-		i++;
 	}
-	// std::vector<int>::iterator it2;
-	// std::vector<int>::iterator it2bis;
-	ft::vector<int>::iterator it2;
-	ft::vector<int>::iterator it2bis;
 
-	it2=test2.begin()+1;
-	test2.assign(it2, it2+8);
-	std::cout << "size : " << test2.size() << std::endl;
-	std::cout << "capacity : " << test2.capacity() << std::endl;
-
+	std::vector<int> test4;
+	test4.assign(test2.begin(), test2.end());
 	
-	// std::cout << "at 0: "<< test2.at(0) << std::endl;
-	// std::cout << "at 1: "<< test2.at(1) << std::endl;
-	// std::cout << "at 2: "<< test2.at(2) << std::endl;
-	// std::cout << "at 3: "<< test2.at(3) << std::endl;
-	// std::cout << "at 4: "<< test2.at(4) << std::endl;
-	// test2.assign(it2, test2.end()-1);
-	// std::cout << "size : " << test2.size() << std::endl;
-	// std::cout << "capacity : " << test2.capacity() << std::endl;
+	// std::vector<int> test4(test2.begin(), test2.end());
+	// if(test2 == test4)
+	// {
+	// 	std::cout << "Yep " << std::endl;
+	// }
+	std::cout << "size : " << test4.size() << std::endl;
+	std::cout << "capacity : " << test4.capacity() << std::endl;
+
+	for(int i = 0; i < test4.size(); i++)
+		std::cout << "at " << i << ": " << test4.at(i) << std::endl;
 }
 
 	// it2 = test2.begin();

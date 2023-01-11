@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 10:44:12 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/10 10:51:04 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/11 16:32:36 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,17 @@ namespace ft
 			//post increment : returns a copy of the original, unincremented object
 		my_iterator& operator++() { _current++; return (*this); }
 		my_iterator operator++(int) { my_iterator tmp = *this; ++(*this); return tmp; }
-		my_iterator operator+(difference_type n) const { return my_iterator(_current + n); }
+		my_iterator operator+(difference_type n) const { my_iterator tmp = *this; tmp._current += n; return tmp;}
 		my_iterator& operator+=(difference_type n) { _current += n; return (*this); }
 		
 		my_iterator& operator--() { _current--; return (*this); }
 		my_iterator operator--(int){ my_iterator tmp = *this; --(*this); return tmp; }
 		my_iterator operator-(difference_type n) const { return my_iterator(_current - n); }
 		my_iterator& operator-=(difference_type n) { _current -= n; return (*this); }
+		difference_type operator-(const my_iterator &rhs) 
+		{
+			return (this->_current - rhs._current); 
+		}
 		// INDEX OPERATORS
 		reference operator[](int index) { return *(_current + index); }
 		pointer operator->() { return (_current); }

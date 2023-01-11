@@ -52,6 +52,17 @@
 		"streambuf": "cpp",
 		"system_error": "cpp",
 		"tuple": "cpp",
-		"typeinfo": "cpp"
+		"typeinfo": "cpp",
+		"__node_handle": "cpp",
+		"__tree": "cpp",
+		"array": "cpp",
+		"csignal": "cpp",
+		"fstream": "cpp",
+		"iomanip": "cpp",
+		"map": "cpp",
+		"optional": "cpp",
+		"set": "cpp",
+		"sstream": "cpp",
+		"stack": "cpp"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:50:04 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/10 14:19:30 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:59:43 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ namespace ft
 	template<class Iterator>
 	reverse_iterator<Iterator> operator+(typename reverse_iterator<Iterator>::difference_type n, const reverse_iterator<Iterator>& it)
 	{
-		std::cout << "cornichon" << std::endl;
 		return (it - n);
 	}
 	template <class Iterator>

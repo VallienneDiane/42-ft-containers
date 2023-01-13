@@ -6,14 +6,14 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:51:54 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/06 16:56:47 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/13 11:05:50 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EQUAL_HPP
 #define EQUAL_HPP
 #include <iterator>
-#include "vector.hpp"
+#include "Vector.hpp"
 
 namespace ft
 {

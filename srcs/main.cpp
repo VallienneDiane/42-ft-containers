@@ -6,69 +6,195 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/11 18:10:58 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:10:29 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <vector>
 #include <iterator>
-#include "../incs/vector.hpp"
+#include "../incs/Vector.hpp"
+
+
+// template< typename T >
+// std::vector<int> constructor_test(std::vector<T> vector) {
+// 	std::vector<int> v;
+// 	std::vector<int> tmp0(vector);
+// 	std::vector<int> tmp(1000 * _ratio, 4), tmp2(1000 * _ratio, 5);
+// 	tmp = tmp2;
+// 	std::vector<int> tmp3(tmp);
+
+// 	std::vector<int> tmp4(tmp.begin(), tmp.end());
+
+// 	v.push_back(tmp4.size());
+// 	v.push_back(tmp4.capacity());
+// 	v.push_back(tmp[2]);
+// 	v.push_back(tmp3[2]);
+// 	v.push_back(tmp4[2]);
+// 	try { std::vector<int> tmp5(-1, -1); }
+// 	catch (std::exception &e) { v.push_back(1); }
+// 	return v;
+// }
+
+
+// template< typename T >
+// std::vector<int> constructor_test(ft::vector<T> vector) {
+// 	std::vector<int> v;
+// 	ft::vector<int> tmp0(vector);
+// 	ft::vector<int> tmp(1000 * _ratio, 4), tmp2(1000 * _ratio, 5);
+// 	tmp = tmp2;
+// 	ft::vector<int> tmp3(tmp);
+
+// 	ft::vector<int> tmp4(tmp.begin(), tmp.end());
+
+// 	v.push_back(tmp4.size());
+// 	v.push_back(tmp4.capacity());
+// 	v.push_back(tmp[2]);
+// 	v.push_back(tmp3[2]);
+// 	v.push_back(tmp4[2]);
+// 	try { ft::vector<int> tmp5(-1, -1); }
+// 	catch (std::exception &e) { v.push_back(1); }
+// 	return v;
+// }
+
+// int main() {
+
+//     exit(run_vector_unit_test<int>("constructor", constructor_test, constructor_test));
+// }
+
 
 int main(void)
 {
 	std::cout << " -------------- FT::VECTOR --------------- " << std::endl;
 
 	ft::vector<int> test;
-	for (int j = 0; j < 15; j++)
+	
+	for (int j = 0; j < 12; j++)
 	{
 		test.push_back(j);
 	}
 
-	ft::vector<int> test3;
-	test3.assign(test.begin(), test.end());
-
-	// ft::vector<int> test3(test.begin(), test.end()-1);
-	// if(test == test3)
-	// 	std::cout << "YEPPPP " << std::endl;
-	// else
-	// 	std::cout << "NOOOOPE " << std::endl;
+	ft::vector<int> test2;
+	for (int j = 8; j < 12; j++)
+	{
+		test2.push_back(j);
+	}
 	
-	std::cout << "size : " << test3.size() << std::endl;
-	std::cout << "capacity : " << test3.capacity() << std::endl;
+	test2 = test;
+	
+	for(int i = 0; i < test2.size(); i++)
+		std::cout << "TEST at " << i << ": " << test2.at(i) << std::endl;
+	std::cout << "size : " << test2.size() << std::endl;
+	std::cout << "capacity : " << test2.capacity() << std::endl;
 
-	for(int i = 0; i < test3.size(); i++)
-		std::cout << "at " << i << ": " << test3.at(i) << std::endl;
-
-	// std::cout << "at 10: " << test.at(10) << std::endl;
-	// test.assign(it, test.end()-1);
-	// std::cout << "size : " << test.size() << std::endl;
-	// std::cout << "capacity : " << test.capacity() << std::endl;
 	
 ////////////////////////////////////////////////////////////////////////////////////
 	std::cout << " -------------- STD::VECTOR --------------- " << std::endl;
 	
-	std::vector<int> test2;
-	for (int j = 0; j < 15; j++)
+	std::vector<int> test3;
+	
+	for (int j = 0; j < 12; j++)
 	{
-		test2.push_back(j);
+		test3.push_back(j);
 	}
 
 	std::vector<int> test4;
-	test4.assign(test2.begin(), test2.end());
+	for (int j = 8; j < 12; j++)
+	{
+		test3.push_back(j);
+	}
 	
-	// std::vector<int> test4(test2.begin(), test2.end());
-	// if(test2 == test4)
-	// {
-	// 	std::cout << "Yep " << std::endl;
-	// }
+	test4 = test3;
+	
+	for(int i = 0; i < test4.size(); i++)
+		std::cout << "TEST3 at " << i << ": " << test4.at(i) << std::endl;
 	std::cout << "size : " << test4.size() << std::endl;
 	std::cout << "capacity : " << test4.capacity() << std::endl;
-
-	for(int i = 0; i < test4.size(); i++)
-		std::cout << "at " << i << ": " << test4.at(i) << std::endl;
 }
+//SWAP
+// 	ft::vector<int> test;
+// 	ft::vector<int> test2;
+	
+// 	for (int j = 0; j < 12; j++)
+// 	{
+// 		test.push_back(j);
+// 	}
+// 	for (int j = 80; j < 85; j++)
+// 	{
+// 		test2.push_back(j);
+// 	}
+	
+// 	for(int i = 0; i < test.size(); i++)
+// 		std::cout << "TEST at " << i << ": " << test.at(i) << std::endl;
+// 	std::cout << "size : " << test.size() << std::endl;
+// 	std::cout << "capacity : " << test.capacity() << std::endl;
+		
+// 	for(int i = 0; i < test2.size(); i++)
+// 		std::cout << "TEST2 at " << i << ": " << test2.at(i) << std::endl;
+// 	std::cout << "size : " << test2.size() << std::endl;
+// 	std::cout << "capacity : " << test2.capacity() << std::endl;
+	
+// 	std::cout << "--------------------------- SWAP !!!" << std::endl;
+// 	test.swap(test2);
+	
+// 	for(int i = 0; i < test.size(); i++)
+// 		std::cout << "TEST at " << i << ": " << test.at(i) << std::endl;
+// 	std::cout << "size : " << test.size() << std::endl;
+// 	std::cout << "capacity : " << test.capacity() << std::endl;
+		
+// 	for(int i = 0; i < test2.size(); i++)
+// 		std::cout << "TEST2 at " << i << ": " << test2.at(i) << std::endl;
+// 	std::cout << "size : " << test2.size() << std::endl;
+// 	std::cout << "capacity : " << test2.capacity() << std::endl;
 
+	
+// ////////////////////////////////////////////////////////////////////////////////////
+// 	std::cout << " -------------- STD::VECTOR --------------- " << std::endl;
+	
+// 	std::vector<int> test3;
+// 	std::vector<int> test4;
+	
+// 	for (int j = 0; j < 12; j++)
+// 	{
+// 		test3.push_back(j);
+// 	}
+// 	for (int j = 80; j < 85; j++)
+// 	{
+// 		test4.push_back(j);
+// 	}
+	
+// 	for(int i = 0; i < test3.size(); i++)
+// 		std::cout << "TEST3 at " << i << ": " << test3.at(i) << std::endl;
+// 	std::cout << "size : " << test3.size() << std::endl;
+// 	std::cout << "capacity : " << test3.capacity() << std::endl;
+		
+// 	for(int i = 0; i < test4.size(); i++)
+// 		std::cout << "TEST4 at " << i << ": " << test4.at(i) << std::endl;
+// 	std::cout << "size : " << test4.size() << std::endl;
+// 	std::cout << "capacity : " << test4.capacity() << std::endl;
+	
+// 	std::cout << "------------------------------- SWAP !!!" << std::endl;
+// 	test3.swap(test4);
+	
+// 	for(int i = 0; i < test3.size(); i++)
+// 		std::cout << "TEST3 at " << i << ": " << test3.at(i) << std::endl;
+// 	std::cout << "size : " << test3.size() << std::endl;
+// 	std::cout << "capacity : " << test3.capacity() << std::endl;
+		
+// 	for(int i = 0; i < test4.size(); i++)
+// 		std::cout << "TEST4 at " << i << ": " << test4.at(i) << std::endl;
+// 	std::cout << "size : " << test4.size() << std::endl;
+// 	std::cout << "capacity : " << test4.capacity() << std::endl;
+// END OF SWAP
+
+	// test.assign(it, test.end()-1);
+	// test4.assign(test2.begin(), test2.end());
+	// std::vector<int> test4(test2.begin(), test2.end());
+	// for(int i = 0; i < test4.size(); i++)
+	// 	std::cout << "at " << i << ": " << test4.at(i) << std::endl;
+	
+	// std::cout << "size : " << test.size() << std::endl;
+	// std::cout << "capacity : " << test.capacity() << std::endl;
 	// it2 = test2.begin();
 	// it2bis = test2.begin()+5;
 	// it2 = test2.rbegin();
@@ -81,7 +207,6 @@ int main(void)
 	// test.swap(test2);
 	// test.resize(16);
 	// test.pop_back();
-
 
 // #include <string>
 // #include <deque>

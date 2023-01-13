@@ -100,3 +100,8 @@ https://www.geeksforgeeks.org/stdallocator-in-cpp-with-examples/
 size & capacity & max_size
 https://www.fluentcpp.com/2017/10/13/size-capacity-stl-containers/
 https://en.cppreference.com/w/cpp/container/vector/max_size
+
+
+<p align="center">
+<img src="vector_img.png" width="500">
+</p>

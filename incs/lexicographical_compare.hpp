@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:50:28 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/11 16:57:55 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/13 11:06:03 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define LEXICOGRAPHICAL_COMPARE_HPP
 
 // Checks if the first range [first1, last1) is lexicographically less than the second range [first2, last2)
-
 namespace ft
 {
 	template<class InputIt1, class InputIt2>

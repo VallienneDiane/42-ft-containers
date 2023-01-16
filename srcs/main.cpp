@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/13 16:10:29 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:52:20 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,47 +69,67 @@ int main(void)
 
 	ft::vector<int> test;
 	
-	for (int j = 0; j < 12; j++)
+	for (int j = 0; j < 10; j++)
 	{
 		test.push_back(j);
 	}
 
-	ft::vector<int> test2;
-	for (int j = 8; j < 12; j++)
-	{
-		test2.push_back(j);
-	}
+	ft::vector<int>::iterator it;
+
+	it = test.begin()+3;
 	
-	test2 = test;
+	test.insert(it, 4, 58);
+	// ft::vector<int> test2;
+	// for (int j = 8; j < 12; j++)
+	// {
+	// 	test2.push_back(j);
+	// }
 	
-	for(int i = 0; i < test2.size(); i++)
-		std::cout << "TEST at " << i << ": " << test2.at(i) << std::endl;
-	std::cout << "size : " << test2.size() << std::endl;
-	std::cout << "capacity : " << test2.capacity() << std::endl;
+	// test2 = test;
+	
+	for(int i = 0; i < test.size(); i++)
+		std::cout << "at " << i << ": " << test.at(i) << std::endl;
+	std::cout << std::endl;
+	std::cout << "size : " << test.size() << std::endl;
+	std::cout << "capacity : " << test.capacity() << std::endl;
+	
+	// for(int i = 0; i < test2.size(); i++)
+	// 	std::cout << "TEST at " << i << ": " << test2.at(i) << std::endl;
+	// std::cout << "size : " << test2.size() << std::endl;
+	// std::cout << "capacity : " << test2.capacity() << std::endl;
 
 	
 ////////////////////////////////////////////////////////////////////////////////////
 	std::cout << " -------------- STD::VECTOR --------------- " << std::endl;
 	
-	std::vector<int> test3;
+		std::vector<int> test3;
 	
-	for (int j = 0; j < 12; j++)
-	{
-		test3.push_back(j);
-	}
-
-	std::vector<int> test4;
-	for (int j = 8; j < 12; j++)
+	for (int j = 0; j < 10; j++)
 	{
 		test3.push_back(j);
 	}
 	
-	test4 = test3;
+	std::vector<int>::iterator it2 = test3.begin()+3;
 	
-	for(int i = 0; i < test4.size(); i++)
-		std::cout << "TEST3 at " << i << ": " << test4.at(i) << std::endl;
-	std::cout << "size : " << test4.size() << std::endl;
-	std::cout << "capacity : " << test4.capacity() << std::endl;
+	test3.insert(it2, 4, 58);
+	// ft::vector<int> test2;
+	// for (int j = 8; j < 12; j++)
+	// {
+	// 	test2.push_back(j);
+	// }
+	
+	// test2 = test;
+	
+	for(int i = 0; i < test3.size(); i++)
+		std::cout << "at " << i << ": " << test3.at(i) << std::endl;
+	std::cout << std::endl;
+	std::cout << "size : " << test3.size() << std::endl;
+	std::cout << "capacity : " << test3.capacity() << std::endl;
+	
+	// for(int i = 0; i < test2.size(); i++)
+	// 	std::cout << "TEST at " << i << ": " << test2.at(i) << std::endl;
+	// std::cout << "size : " << test2.size() << std::endl;
+	// std::cout << "capacity : " << test2.capacity() << std::endl;
 }
 //SWAP
 // 	ft::vector<int> test;

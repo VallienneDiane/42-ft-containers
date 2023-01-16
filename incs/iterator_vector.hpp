@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 10:44:12 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/13 17:24:36 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/16 11:37:52 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ namespace ft
 		public:
 			my_iterator(): _current(NULL) {}
 			explicit my_iterator(value_type *ptr): _current(ptr) {}
-			my_iterator(const my_iterator &other) { _current = other._current;}
+			my_iterator(const my_iterator &other): _current(other._current) {}
 			~my_iterator() {}
 		
 			my_iterator& operator=(const my_iterator &other) { _current = other._current; return (*this); }

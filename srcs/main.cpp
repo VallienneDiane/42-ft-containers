@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/16 15:52:20 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:32:51 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,122 +15,101 @@
 #include <iterator>
 #include "../incs/Vector.hpp"
 
-
-// template< typename T >
-// std::vector<int> constructor_test(std::vector<T> vector) {
-// 	std::vector<int> v;
-// 	std::vector<int> tmp0(vector);
-// 	std::vector<int> tmp(1000 * _ratio, 4), tmp2(1000 * _ratio, 5);
-// 	tmp = tmp2;
-// 	std::vector<int> tmp3(tmp);
-
-// 	std::vector<int> tmp4(tmp.begin(), tmp.end());
-
-// 	v.push_back(tmp4.size());
-// 	v.push_back(tmp4.capacity());
-// 	v.push_back(tmp[2]);
-// 	v.push_back(tmp3[2]);
-// 	v.push_back(tmp4[2]);
-// 	try { std::vector<int> tmp5(-1, -1); }
-// 	catch (std::exception &e) { v.push_back(1); }
-// 	return v;
-// }
-
-
-// template< typename T >
-// std::vector<int> constructor_test(ft::vector<T> vector) {
-// 	std::vector<int> v;
-// 	ft::vector<int> tmp0(vector);
-// 	ft::vector<int> tmp(1000 * _ratio, 4), tmp2(1000 * _ratio, 5);
-// 	tmp = tmp2;
-// 	ft::vector<int> tmp3(tmp);
-
-// 	ft::vector<int> tmp4(tmp.begin(), tmp.end());
-
-// 	v.push_back(tmp4.size());
-// 	v.push_back(tmp4.capacity());
-// 	v.push_back(tmp[2]);
-// 	v.push_back(tmp3[2]);
-// 	v.push_back(tmp4[2]);
-// 	try { ft::vector<int> tmp5(-1, -1); }
-// 	catch (std::exception &e) { v.push_back(1); }
-// 	return v;
-// }
-
-// int main() {
-
-//     exit(run_vector_unit_test<int>("constructor", constructor_test, constructor_test));
-// }
-
-
 int main(void)
 {
 	std::cout << " -------------- FT::VECTOR --------------- " << std::endl;
 
-	ft::vector<int> test;
-	
-	for (int j = 0; j < 10; j++)
+	ft::vector<int> test01;
+	for (int j = 0; j < 15; j++)
 	{
-		test.push_back(j);
+		test01.push_back(j);
 	}
+	std::cout << "size : " << test01.size() << std::endl;
+	std::cout << "capacity : " << test01.capacity() << std::endl;
 
 	ft::vector<int>::iterator it;
 
-	it = test.begin()+3;
-	
-	test.insert(it, 4, 58);
-	// ft::vector<int> test2;
-	// for (int j = 8; j < 12; j++)
-	// {
-	// 	test2.push_back(j);
-	// }
-	
-	// test2 = test;
-	
-	for(int i = 0; i < test.size(); i++)
-		std::cout << "at " << i << ": " << test.at(i) << std::endl;
-	std::cout << std::endl;
-	std::cout << "size : " << test.size() << std::endl;
-	std::cout << "capacity : " << test.capacity() << std::endl;
-	
-	// for(int i = 0; i < test2.size(); i++)
-	// 	std::cout << "TEST at " << i << ": " << test2.at(i) << std::endl;
-	// std::cout << "size : " << test2.size() << std::endl;
-	// std::cout << "capacity : " << test2.capacity() << std::endl;
+	it = test01.begin();
+	test01.insert(it, 5, 42);
 
-	
+	std::cout << std::endl;
+	for(int i = 0; i < test01.size(); i++)
+		std::cout << "at " << i << ": " << test01.at(i) << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "size : " << test01.size() << std::endl;
+	std::cout << "capacity : " << test01.capacity() << std::endl;
+
 ////////////////////////////////////////////////////////////////////////////////////
 	std::cout << " -------------- STD::VECTOR --------------- " << std::endl;
 	
-		std::vector<int> test3;
-	
-	for (int j = 0; j < 10; j++)
+	std::vector<int> test02;
+	for (int j = 0; j < 15; j++)
 	{
-		test3.push_back(j);
+		test02.push_back(j);
 	}
-	
-	std::vector<int>::iterator it2 = test3.begin()+3;
-	
-	test3.insert(it2, 4, 58);
-	// ft::vector<int> test2;
-	// for (int j = 8; j < 12; j++)
-	// {
-	// 	test2.push_back(j);
-	// }
-	
-	// test2 = test;
-	
-	for(int i = 0; i < test3.size(); i++)
-		std::cout << "at " << i << ": " << test3.at(i) << std::endl;
+	std::cout << "size : " << test02.size() << std::endl;
+	std::cout << "capacity : " << test02.capacity() << std::endl;
+
+	std::vector<int>::iterator it2;
+
+	it2 = test02.begin();
+	test02.insert(it2, 5, 42);
+
 	std::cout << std::endl;
-	std::cout << "size : " << test3.size() << std::endl;
-	std::cout << "capacity : " << test3.capacity() << std::endl;
-	
-	// for(int i = 0; i < test2.size(); i++)
-	// 	std::cout << "TEST at " << i << ": " << test2.at(i) << std::endl;
-	// std::cout << "size : " << test2.size() << std::endl;
-	// std::cout << "capacity : " << test2.capacity() << std::endl;
+	for(int i = 0; i < test02.size(); i++)
+		std::cout << "at " << i << ": " << test02.at(i) << std::endl;
+	std::cout << std::endl;
+	std::cout << "size : " << test02.size() << std::endl;
+	std::cout << "capacity : " << test02.capacity() << std::endl;
 }
+
+// INSERT WITH ITERATORS
+// std::cout << " -------------- FT::VECTOR --------------- " << std::endl;
+
+// 	ft::vector<int> test01;
+// 	for (int j = 0; j < 15; j++)
+// 	{
+// 		test01.push_back(j);
+// 	}
+// 	std::cout << "size : " << test01.size() << std::endl;
+// 	std::cout << "capacity : " << test01.capacity() << std::endl;
+
+// 	ft::vector<int>::iterator it;
+
+// 	it = test01.begin();
+// 	test01.insert(it+2, it+10, it+18);
+
+// 	std::cout << std::endl;
+// 	for(int i = 0; i < test01.size(); i++)
+// 		std::cout << "at " << i << ": " << test01.at(i) << std::endl;
+// 	std::cout << std::endl;
+
+// 	std::cout << "size : " << test01.size() << std::endl;
+// 	std::cout << "capacity : " << test01.capacity() << std::endl;
+
+// ////////////////////////////////////////////////////////////////////////////////////
+// 	std::cout << " -------------- STD::VECTOR --------------- " << std::endl;
+	
+// 	std::vector<int> test02;
+// 	for (int j = 0; j < 15; j++)
+// 	{
+// 		test02.push_back(j);
+// 	}
+// 	std::cout << "size : " << test02.size() << std::endl;
+// 	std::cout << "capacity : " << test02.capacity() << std::endl;
+
+// 	std::vector<int>::iterator it2;
+
+// 	it2 = test02.begin();
+// 	test02.insert(it2+2, it2+10, it2+18);
+
+// 	std::cout << std::endl;
+// 	for(int i = 0; i < test02.size(); i++)
+// 		std::cout << "at " << i << ": " << test02.at(i) << std::endl;
+// 	std::cout << std::endl;
+// 	std::cout << "size : " << test02.size() << std::endl;
+// 	std::cout << "capacity : " << test02.capacity() << std::endl;
 //SWAP
 // 	ft::vector<int> test;
 // 	ft::vector<int> test2;

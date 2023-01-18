@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:45:19 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/17 16:35:15 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/18 14:16:41 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,16 +106,13 @@ namespace ft
 			//operator =
 			vector & operator=(const vector &other) 
 			{
-				if(this == &other)
-					return (*this);
+				// if(this == &other)
+				// 	return (*this);
 				clear();
 				reserve(other._size);
-				this->_alloc = allocator_type();
-				this->_arr = _alloc.allocate(other._capacity);
-				this->_size = other._size;
+				_size = other._size;
 				for(size_type i = 0; i < other._size; i++)
 					_alloc.construct((_arr + i), (other._arr[i]));
-				this->_capacity = other._capacity;
 				return (*this);
 			}
 			reference operator[](size_type n) { return (_arr[n]); }
@@ -145,7 +142,7 @@ namespace ft
 			reference at(size_type n)
 			{
 				if (n < 0 || n >= _size)
-					throw; //std::out_of_range("Out of range")
+					throw;
 				else
 					return (_arr[n]);
 			}
@@ -196,27 +193,24 @@ namespace ft
 				}
 				return (position);
 			}
-			// begin at index and destroy then construct one by one
 			iterator erase (iterator first, iterator last)
 			{
-				size_type diff = last - first;
+				ptrdiff_t		size_it = std::distance(first, last);
 				size_type index = first - this->begin();
 				size_type new_size;
 				
-				new_size = *(_arr + index + diff);
+				new_size = _size - size_it;
 				if(_size == 0)
 					return (last);
 				_alloc.destroy(_arr + index);
 				for(size_type i = index; i < new_size; i++)
 				{
-					_alloc.construct(_arr + i, *(_arr + i + diff));
+					_alloc.construct(_arr + i, *(_arr + i + size_it));
 					_alloc.destroy(_arr + index + 1);
 				}
-				_size -= diff;
 				for(int i = new_size; i < *(_arr + _size); i++)
-				{
 					_alloc.destroy(_arr + i);
-				}
+				_size = new_size;
 				return (first);
 			}
 			////////   FRONT   //////////
@@ -227,66 +221,88 @@ namespace ft
 			////////   INSERT    //////////
 			iterator insert(iterator position, const value_type& val)
 			{
-				return (insert(position, 1, val));
-			}
-			iterator insert(iterator position, size_type n, const value_type& val)
-			{
-				size_type	new_size = _size + n;
-				size_type	end = (new_size - 1);
 				size_type	index = position - this->begin();
+				size_type	end = _size;
 				
 				if (index > end || index < 0)
 					throw std::out_of_range("Can't insert outside vector");
 				if(_size == 0)
 				{
-					reserve(n);
-					for(size_type i = 0; i < index; i++)
-						this->push_back(val);				
+					this->push_back(val);
+					return (iterator(_arr + index));				
 				}
-				// else
-				// {
-					reserve(new_size);
-					for(size_type i = end; i > index; i--)
-					{
-						_alloc.construct((_arr + i), *(_arr + i - n));
-						_alloc.destroy(_arr + i - n);
-					}
-					for(size_type i = index; i < (index + n); i++)
-					{
-						_alloc.construct(_arr + i, val);
-						_size++;
-					}
-				// }
-				return position;
+				_size++;
+				reserve(_size);
+				while(end >= index)
+				{
+					_alloc.construct(_arr + end + 1, _arr[end]);
+					_alloc.destroy(_arr + end);
+					if(end == 0)
+						break;
+					end--;
+				}
+				_alloc.construct(_arr + index, val);
+				return (iterator(_arr + index));
+			}
+			void insert(iterator position, size_type n, const value_type& val)
+			{
+				size_type	new_size = _size + n;
+				size_type	index = position - this->begin();
+				
+				if (position < begin()|| position > end())
+					throw std::out_of_range("Invalid iterator position");
+				if(_size == 0)
+				{
+					reserve(n);
+					for(size_type i = 0; i < n; i++)
+						this->push_back(val);
+					return;				
+				}
+				reserve(new_size);
+				for(size_type i = _size; i > index + n; i--)
+				{
+					_alloc.construct(_arr + i, *(_arr + i - n));
+					_alloc.destroy(_arr + i - n);
+				}
+				for(size_type i = 0; i < n; i++)
+				{
+					_alloc.construct(_arr + index + i, val);
+				}
+				_size += n;
 			}
 			template<class InputIterator>
 			void insert(iterator position, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type first, InputIterator last)
 			{
-				ptrdiff_t		size_it = std::distance(first, last);
-				size_type		new_size = _size + size_it;
-				size_type		end = new_size - 1;
-				size_type		index = position - this->begin();
-				
-				if (index > end || index < 0)
-					throw std::out_of_range("Can't insert outside vector");
-				if(_size == 0)
-				{
-					reserve(size_it);
-					for(ptrdiff_t i = 0; i < size_it; i++)
-						this->push_back(*(first++));
-					return;					
-				}
+				if (position < begin() || position > end())
+					throw std::out_of_range("Invalid iterator position");
+				if (first > last)
+					throw std::out_of_range("Invalid range");
+					
+				ft::vector<typename ft::iterator_traits<InputIterator>::value_type> tmp;
+				while (first != last)
+					tmp.push_back(*first++);
+
+				difference_type index = &(*position) - _arr;
+				size_type       n = tmp.size();
+				size_type       new_size = size() + n;
+				size_type		diff = std::distance(first, last);
+
 				reserve(new_size);
-				for(size_type i = end; i > index; i--)
+				for (size_type i = 0; i < n; i++)
+					_alloc.construct(_arr + i, *(_arr + i - diff));
+				for (size_type i = size() + n - 1; i >= index + n; i--)
+					_arr[i] = _arr[i - n];
+				try
 				{
-					_alloc.construct((_arr + i), *(_arr + i - size_it));
-					_alloc.destroy(_arr + i - size_it);
+					for (size_type i = 0; i < n; i++)
+						_arr[index + i] = tmp[i];
 				}
-				for(size_type i = index; i < (index + size_it); i++)
+				catch (...)
 				{
-					_alloc.construct(_arr + i, *(first++));
-					_size++;
-				}			
+					_capacity = 0;
+					throw;
+				}
+				_size += n;
 			}
 			////////   MAX SIZE    //////////
 			size_type max_size() const { return (_alloc.max_size()); }
@@ -352,25 +368,17 @@ namespace ft
 			////////   SWAP   //////////
 			void swap(vector& other)
 			{
-            	pointer			arr;
-				size_type		size;
-				size_type		capacity;
-				Allocator		alloc;
-				
-            	arr = other._arr;
-				size = other._size;
-				capacity = other._capacity;
-				alloc = other._alloc;
-	
+            	T* arr = other._arr;
             	other._arr = _arr;
-            	other._size = _size;
-				other._capacity = _capacity;
-				other._alloc = _alloc;
-
             	_arr = arr;
+
+				size_type size = other._size;
+            	other._size = _size;
             	_size = size;
+				
+				size_type capacity = other._capacity;
+				other._capacity = _capacity;
 				_capacity = capacity;
-				_alloc = alloc;
 			}				
 	};
 	template <class T, class Alloc>
@@ -415,6 +423,15 @@ namespace ft
 	bool operator>=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
 	{
 		return (lhs > rhs || lhs == rhs);
+	}
+}
+
+namespace std
+{
+	template< class T, class Alloc >
+	void swap( ft::vector<T,Alloc>& lhs, ft::vector<T,Alloc>& rhs )
+	{
+		lhs.swap(rhs); 
 	}
 }
 

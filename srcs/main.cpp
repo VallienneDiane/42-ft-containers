@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/17 16:32:51 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:56:13 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main(void)
 	std::cout << " -------------- FT::VECTOR --------------- " << std::endl;
 
 	ft::vector<int> test01;
+	ft::vector<int> test01bis;
 	for (int j = 0; j < 15; j++)
 	{
 		test01.push_back(j);
@@ -29,8 +30,11 @@ int main(void)
 
 	ft::vector<int>::iterator it;
 
-	it = test01.begin();
-	test01.insert(it, 5, 42);
+	it = test01.end();
+	// std::cout << "it = " << *it << std::endl;
+	// test01.erase(it+3, it+5);
+	test01.insert(it, 5);
+	// test01.insert(it, 42);
 
 	std::cout << std::endl;
 	for(int i = 0; i < test01.size(); i++)
@@ -44,6 +48,7 @@ int main(void)
 	std::cout << " -------------- STD::VECTOR --------------- " << std::endl;
 	
 	std::vector<int> test02;
+	std::vector<int> test02bis;
 	for (int j = 0; j < 15; j++)
 	{
 		test02.push_back(j);
@@ -53,8 +58,10 @@ int main(void)
 
 	std::vector<int>::iterator it2;
 
-	it2 = test02.begin();
-	test02.insert(it2, 5, 42);
+	it2 = test02.end();
+	// test02.erase(it2+3, it2+5);
+	test02.insert(it2, 5);
+	// test02.insert(it2, 42);
 
 	std::cout << std::endl;
 	for(int i = 0; i < test02.size(); i++)

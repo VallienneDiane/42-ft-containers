@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:45:19 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/18 14:16:41 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:34:37 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,7 +360,8 @@ namespace ft
 				{
 					reserve(count);
 				}
-				_alloc.construct(_arr + count, value);
+				for(size_type i = _size; i < count; i++)
+					_alloc.construct(_arr + i, value);
 				_size = count;
 			}
 			////////   SIZE   //////////

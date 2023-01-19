@@ -6,7 +6,7 @@
 /*   By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:15:18 by dvallien          #+#    #+#             */
-/*   Updated: 2023/01/18 13:56:13 by dvallien         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:48:15 by dvallien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,10 @@ int main(void)
 	std::cout << "size : " << test01.size() << std::endl;
 	std::cout << "capacity : " << test01.capacity() << std::endl;
 
-	ft::vector<int>::iterator it;
-
-	it = test01.end();
-	// std::cout << "it = " << *it << std::endl;
-	// test01.erase(it+3, it+5);
-	test01.insert(it, 5);
-	// test01.insert(it, 42);
+	test01.resize(7, 42);
 
 	std::cout << std::endl;
-	for(int i = 0; i < test01.size(); i++)
+	for(size_t i = 0; i < test01.size(); i++)
 		std::cout << "at " << i << ": " << test01.at(i) << std::endl;
 	std::cout << std::endl;
 
@@ -56,15 +50,10 @@ int main(void)
 	std::cout << "size : " << test02.size() << std::endl;
 	std::cout << "capacity : " << test02.capacity() << std::endl;
 
-	std::vector<int>::iterator it2;
-
-	it2 = test02.end();
-	// test02.erase(it2+3, it2+5);
-	test02.insert(it2, 5);
-	// test02.insert(it2, 42);
-
+	test02.resize(7, 42);
+	
 	std::cout << std::endl;
-	for(int i = 0; i < test02.size(); i++)
+	for(size_t i = 0; i < test02.size(); i++)
 		std::cout << "at " << i << ": " << test02.at(i) << std::endl;
 	std::cout << std::endl;
 	std::cout << "size : " << test02.size() << std::endl;
